@@ -1,0 +1,135 @@
+﻿@model AdminRFID.Models.Sesion
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<!DOCTYPE HTML>
+<html lang="en">
+<!-- Mirrored from radixtouch.in/templates/admin/zivi/source/light/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 12 Feb 2020 04:17:49 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title></title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/assets/css/app.min.css">
+
+    <link href="~/assets/bundles/izitoast/css/iziToast.min.css" rel="stylesheet" />
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/components.css">
+    <!-- Custom style CSS -->
+    <link rel="stylesheet" href="~/assets/css/custom.css">
+    <link rel='shortcut icon' type='image/x-icon' href='~/assets/img/logo_64.png' />
+
+    <script>
+        var pathServer = '@Url.Content("~/assets/img/logo.png")';
+     
+    
+        
+        function rootUrl(url) {
+            var _rootUrl = '@Url.Content("~")';
+            var x = url;
+            if (url.indexOf(_rootUrl) != 0) {
+                x = _rootUrl + "/" + url;
+                x = x.replace(/\/\//g, "/").replace(/\/\//g, "/");
+            }
+            return x;
+        };
+    </script>
+
+</head>
+
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h4>Login</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group" style="text-align:center">
+                                    <img alt="image" src="~/assets/img/logo.png" style="width: 200px;height: 200px;" class="user-img-radious-style">
+                                </div>
+                                @*<form method="POST" action="#" class="needs-validation" novalidate="">*@
+                                @using (Ajax.BeginForm("ValidarUsuario", "Login",
+
+                                 new AjaxOptions
+                                 {
+                                     HttpMethod = "Post",
+                                     OnBegin = "onBeginSubmit",
+                                     OnComplete = "onCompleteSubmit",
+                                     OnFailure = "onFailureResult",
+                                     OnSuccess = "onSuccessResult",
+                                 },
+                                 new { id = "frmLogin" }))
+                                {
+                                    <div class="form-group">
+                                        <label for="email">Usuario</label>
+                                        @Html.TextBoxFor(x => x.usuario.usuario, null, new { @class = "form-control", @tabindex = "1" })
+                                        @Html.ValidationMessageFor(m => m.usuario.usuario, null, new { @class = "text-danger was" })
+
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="d-block">
+                                            <label for="password" class="control-label">Contraseña</label>
+                                            <div class="float-right">
+                                                <a href="#" class="text-small">
+                                                    Forgot Password?
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @Html.HiddenFor(x => x.Token)
+                                        @Html.PasswordFor(x => x.usuario.contrasena, new { @class = "form-control", @tabindex = "2" })
+                                        @Html.ValidationMessageFor(m => m.usuario.contrasena, null, new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                            Iniciar Sesion
+                                        </button>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="mt-5 text-muted text-center">
+                            <a href="#">Administrador</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        var element;
+    </script>
+
+
+    <script src="~/assets/js/app.min.js"></script>
+    <script src="~/assets/bundles/izitoast/js/iziToast.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/assets/js/scripts.js"></script>
+
+
+
+
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfandgUAAAAAC71dmEsGltVDobKPEYFvC_ocuP_"></script>
+    <script>
+
+    </script>
+    @Scripts.Render("~/js/Index.js")
+    @Scripts.Render("~/js/EvtLogin.js")
+
+</body>
+
+
+
+</html>
