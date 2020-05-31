@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title- Comercializador</title>
+    <title>@ViewBag.Title- RFID</title>
 
     <link rel="stylesheet" href="~/assets/css/app.min.css">
     <link rel="stylesheet" href="~/assets/bundles/izitoast/css/iziToast.min.css" />
@@ -19,7 +19,7 @@
     <link href="~/assets/css/loader.css" rel="stylesheet" />
     @RenderSection("Styles", false)
     <script>
-        var pathServer = '@Url.Content("~/assets/img/logo.png")';
+        var pathServer = '@Url.Content("~/assets/img/logo_1.png")';
         function rootUrl(url) {
             var _rootUrl = '@Url.Content("~")';
             var x = url;
@@ -71,7 +71,7 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="index.html">
+                        <a href="@Url.Action("index", "DashBoard")">
                             <img style="width:60px; height:53px;" alt="image" src="~/assets/img/logo_64.png" class="header-logo" /> <span class="logo-name"></span>
                         </a>
                     </div>

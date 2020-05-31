@@ -69,7 +69,7 @@
                                 {
                                     <div class="form-group">
                                         <label for="email">Usuario</label>
-                                        @Html.TextBoxFor(x => x.usuario.usuario, null, new { @class = "form-control", @tabindex = "1" })
+                                        @Html.TextBoxFor(x => x.usuario.usuario, null, new { @class = "form-control", @tabindex = "1", data_val_required = "El usuario no puede ir vacio", data_val = "true" })
                                         @Html.ValidationMessageFor(m => m.usuario.usuario, null, new { @class = "text-danger was" })
 
                                     </div>
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                         @Html.HiddenFor(x => x.Token)
-                                        @Html.PasswordFor(x => x.usuario.contrasena, new { @class = "form-control", @tabindex = "2" })
+                                        @Html.PasswordFor(x => x.usuario.contrasena, new { @class = "form-control", @tabindex = "2", data_val_required = "La contraseña no puede ir vacia", data_val = "true" })
                                         @Html.ValidationMessageFor(m => m.usuario.contrasena, null, new { @class = "text-danger" })
 
                                     </div>
@@ -110,7 +110,9 @@
         var element;
     </script>
 
-
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/assets/js/app.min.js"></script>
     <script src="~/assets/bundles/izitoast/js/iziToast.min.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>

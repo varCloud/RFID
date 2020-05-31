@@ -201,6 +201,7 @@
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\UsuariosDAO.cs" />
     <Compile Include="Filters\SessionTimeout.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -806,6 +807,7 @@
     <Content Include="assets\img\image-64.png" />
     <Content Include="assets\img\loading.gif" />
     <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\logo_1.png" />
     <Content Include="assets\img\logo_64.png" />
     <Content Include="assets\img\marcaAgua.png" />
     <Content Include="assets\img\producto.png" />
@@ -880,6 +882,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="js\EvtLogin.js" />
+    <Content Include="js\EvtUsuarios.js" />
     <Content Include="js\Index.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -973,6 +976,8 @@
     <Content Include="Views\Productos\Productos.cshtml" />
     <Content Include="Views\Usuarios\Usuarios.cshtml" />
     <Content Include="Views\Reportes\Reportes.cshtml" />
+    <Content Include="Views\Usuarios\_Usuario.cshtml" />
+    <Content Include="Views\Usuarios\_ConsultaUsuarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

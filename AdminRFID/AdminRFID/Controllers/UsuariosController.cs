@@ -1,4 +1,6 @@
-﻿using AdminRFID.Filters;
+﻿using AdminRFID.DAO;
+using AdminRFID.Filters;
+using AdminRFID.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,86 @@ namespace AdminRFID.Controllers
         // GET: Usuario
         public ActionResult Usuarios()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+          
         }
+
+        [HttpPost]
+        public ActionResult _Usuario(Usuario usuario)
+        {
+            try
+            {
+                Usuario us = new Usuario();
+                
+                if (usuario.idUsuario > 0)
+                {
+                    us = new UsuariosDAO().ObtenerUsuarios(usuario).Modelo.First();      
+                }
+                
+                return PartialView(us);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public ActionResult _ConsultaUsuarios()
+        {
+            try
+            {
+                return PartialView(new UsuariosDAO().ObtenerUsuarios(new Usuario()));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult GuardarUsuario(Usuario usuario)
+        {
+            try
+            {
+                Notificacion<string> result = new UsuariosDAO().GuardaUsuario(usuario);
+                return Json(result,JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult ActualizaActivoUsuario(Usuario usuario)
+        {
+            try
+            {
+                Notificacion<string> result = new UsuariosDAO().ActualizaActivoUsuario(usuario);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+
+
     }
 }

@@ -1,0 +1,65 @@
+﻿@using AdminRFID.Models;
+@model Notificacion<List<Usuario>>
+
+@{
+    Layout = null;
+    List<Usuario> usuarios = Model.Modelo != null ? Model.Modelo : new List<Usuario>();
+}
+
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tblUsuarios">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        #
+                                    </th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Telefono</th>
+                                    <th>Usuario</th>
+                                    <th>Rol</th>
+                                    @*<th>Activo</th>*@
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Usuario item in usuarios)
+                                {
+                                    <tr>
+                                        <td>@item.idUsuario</td>
+                                        <td>@item.nombreCompleto</td>
+                                        <td>@item.correo</td>
+                                        <td>@item.telefono</td>
+                                        <td>@item.usuario</td>
+                                        <td><div class="badge @Html.Raw(item.rol.idRol==1 ? "badge-success" : "badge-warning") badge-shadow">@item.rol.descripcion</div>
+                                        @*<td>
+                                            <label>
+                                                @Html.CheckBoxFor(x => item.Activo, new { name = "custom-switch-checkbox", @class = "custom-switch-input",onchange= "ActualizaActivo(this,'"+@item.idUsuario+"')",activo=item.Activo })
+                                                <span class="custom-switch-indicator"></span>
+                                            </label>
+                                        </td>*@
+                                        <td>
+                                            <div class="buttons">
+                                                <a href="javascript:ConsultaUsuario(@item.idUsuario);" class="btn btn-icon btn-success" data-toggle="tooltip" title="Editar"><i class="far fa-edit"></i></a>
+                                                <a href="javascript:EliminarUsuario(@item.idUsuario);" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Eliminar"><i class="fas fa-times"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
