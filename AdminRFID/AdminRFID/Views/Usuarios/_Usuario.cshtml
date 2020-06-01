@@ -39,13 +39,13 @@ new { id = "frmUsuario" }))
             <label>Contraseña</label>
             <div class="input-group">
                 @Html.TextBoxFor(x => usuario.contrasena, new { @class = "form-control", @id = "contrasena", type = "password", data_val_required = "La contraseña no puede ir vacia", data_val = "true" })
-                @Html.ValidationMessageFor(x => usuario.contrasena, null, new { @class = "text-danger was" })
                 <div class="input-group-append">
                     <div class="input-group-text" id="MostrarPassword">
                         <i class="fas fa-eye"></i>
                     </div>
                 </div>
             </div>
+            @Html.ValidationMessageFor(x => usuario.contrasena, null, new { @class = "text-danger was" })
         </div>
 
 
