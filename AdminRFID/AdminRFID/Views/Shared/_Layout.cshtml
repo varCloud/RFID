@@ -102,6 +102,12 @@
                             </a>
                         </li>
 
+                        <li class="@(ViewBag.Title.ToString() == "Inventario" ? "dropdown active" : "")">
+                            <a href="@Url.Action("Inventario", "Inventario")">
+                                <i class="fas fa-tasks"></i><span>Inventario</span>
+                            </a>
+                        </li>
+
                         <li class="@(ViewBag.Title.ToString() == "Reportes" ? "dropdown active" : "")">
                             <a href="@Url.Action("Reportes", "Reportes")">
                                 <i data-feather="bar-chart-2"></i><span>Reportes</span>

@@ -62,6 +62,21 @@ namespace AdminRFID.Controllers
         }
 
 
+        public ActionResult _ObtenerInventario(InventarioDetalle inventario)
+        {
+            try
+            {
+                Notificacion<List<InventarioDetalle>> notificacion = new InventarioDAO().ObtenerInventario(inventario);
+                return PartialView(notificacion);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+
 
 
     }

@@ -46,5 +46,50 @@ namespace AdminRFID.DAO
             return notificacion;
         }
 
+        public Notificacion<List<InventarioDetalle>> ObtenerInventario(InventarioDetalle i)
+        {
+
+            Notificacion<List<InventarioDetalle>> notificacion = new Notificacion<List<InventarioDetalle>>();
+            try
+            {
+                using (db = new SqlConnection(ConfigurationManager.AppSettings["conexionString"].ToString()))
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@tagProducto", string.IsNullOrEmpty(i.producto.tag)? (object)null : i.producto.tag);
+                    parameters.Add("@idCatTipoInventario", i.tipoInventario == 0 ? (object)null : i.tipoInventario);
+                    parameters.Add("@idEstatusInventario", i.estatusInventario == 0 ? (object)null : i.estatusInventario);
+                    parameters.Add("@idUsuario", i.usuario.idUsuario == 0 ? (object)null : i.usuario.idUsuario);
+                    parameters.Add("@fechaInicio", i.fechaInicio == DateTime.MinValue ? (object)null : i.fechaInicio);
+                    parameters.Add("@fechaFin", i.fechaFin == DateTime.MinValue ? (object)null : i.fechaFin);
+                    var result = db.QueryMultiple("SP_OBTENER_INVENTARIO", parameters, commandType: CommandType.StoredProcedure);
+                    var r1 = result.ReadFirst();
+                    if (r1.Estatus == 200)
+                    {
+                        notificacion.Estatus = r1.Estatus;
+                        notificacion.Mensaje = r1.Mensaje;
+                        notificacion.Modelo = result.Read<InventarioDetalle, Producto,Usuario, InventarioDetalle>(MapInventario, splitOn: "idProducto,idUsuario").ToList();
+                    }
+                    else
+                    {
+                        notificacion.Estatus = r1.Estatus;
+                        notificacion.Mensaje = r1.Mensaje;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return notificacion;
+        }
+
+
+        public InventarioDetalle MapInventario(InventarioDetalle i, Producto p,Usuario u)
+        {
+            i.producto = p;
+            i.usuario = u;
+            return i;
+        }
     }
 }

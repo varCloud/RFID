@@ -886,6 +886,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\evtInventario.js" />
     <Content Include="js\EvtLogin.js" />
     <Content Include="js\EvtProductos.js" />
     <Content Include="js\EvtUsuarios.js" />
@@ -988,6 +989,7 @@
     <Content Include="Views\Productos\_ConsultaProductos.cshtml" />
     <Content Include="Views\Inventario\Inventario.cshtml" />
     <Content Include="Views\Inventario\_Inventario.cshtml" />
+    <Content Include="Views\Inventario\_ObtenerInventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

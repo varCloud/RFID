@@ -10,4 +10,10 @@ namespace AdminRFID.Models
         Entrada = 1,
         Salida=2        
     }
+
+    public enum EnumEstatusInventario
+    {
+        Realizado = 1,
+        Cancelado = 2
+    }
 }
