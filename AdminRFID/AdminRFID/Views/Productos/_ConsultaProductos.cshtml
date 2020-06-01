@@ -1,0 +1,65 @@
+﻿@using AdminRFID.Models;
+@model Notificacion<List<Producto>>
+
+@{
+    Layout = null;
+    List<Producto> productos = Model.Modelo != null ? Model.Modelo : new List<Producto>();
+}
+
+<div class="section-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="tblProductos">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        #
+                                    </th>
+                                    <th>Tag</th>
+                                    <th>Descripciòn</th>
+                                    <th>Cantidad</th>
+                                    <th>Fecha Alta</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Producto item in productos)
+                                {
+                                <tr>
+                                    <td>@item.idProducto</td>
+                                    <td>@item.tag</td>
+                                    <td>@item.descripcion</td>
+                                    <td>@item.cantidad</td>
+                                    <td>@item.fechaAlta.ToShortDateString()</td>
+
+                                    @*<td>
+            <label>
+                @Html.CheckBoxFor(x => item.Activo, new { name = "custom-switch-checkbox", @class = "custom-switch-input",onchange= "ActualizaActivo(this,'"+@item.idUsuario+"')",activo=item.Activo })
+                <span class="custom-switch-indicator"></span>
+            </label>
+        </td>*@
+                                    <td>
+                                        <div class="buttons">
+                                            <a href="javascript:ConsultaProducto(@item.idProducto);" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Editar"><i class="far fa-edit"></i></a>
+                                            <a href="javascript:EliminarProducto(@item.idProducto);" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Eliminar"><i class="fas fa-times"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

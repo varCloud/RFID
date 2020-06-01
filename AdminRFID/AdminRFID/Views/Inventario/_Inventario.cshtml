@@ -1,0 +1,56 @@
+﻿@using AdminRFID.Models;
+
+@{ Layout = null;
+    List<SelectListItem> listProductos = ViewBag.listProductos;
+    InventarioDetalle inventario = new InventarioDetalle();
+}
+
+<input type="hidden" id="idTipoInventario" value="@ViewBag.tipoInventario" />
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="form-group col-lg-6">
+                <label>Producto</label>
+                @Html.DropDownListFor(x => inventario.producto.idProducto, listProductos, "--SELECCIONA--", new { id = "idProductoInventario", style = "width:100%", @class = "select-multiple", placeholder = "", data_val_required = "Seleccione un producto", data_val = "true" })
+            </div>
+            <div class="form-group col-lg-4">
+                <label>Cantidad</label>
+                @Html.TextBoxFor(x => inventario.producto.cantidad, null, new { id = "cantidadProductoInventario", @class = "form-control", onkeypress = "return esNumero(event)" })
+            </div>
+            <div class="form-group col-lg-2">
+                <div class="text-right" style="margin-top:30px;">
+                    <button type="button" id="btnAgregarProductoInventario" class="btn btn-success"> &nbsp; Agregar &nbsp;</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="tblInventario">
+                        <thead>
+                            <tr>
+                                <th>Id Producto</th>
+                                <th>Producto</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Acciones</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-lg-12">
+        <div class="text-right" style="margin-top:15px;">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="submit" id="btnGuardarInventario" class="btn btn-success">Guardar</button>
+        </div>
+    </div>
+</div>

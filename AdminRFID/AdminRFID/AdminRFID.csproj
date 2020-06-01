@@ -196,16 +196,21 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="DAO\InventarioDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
+    <Compile Include="DAO\ProductoDAO.cs" />
     <Compile Include="DAO\UsuariosDAO.cs" />
     <Compile Include="Filters\SessionTimeout.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Enumeracion.cs" />
+    <Compile Include="Models\InventarioDetalle.cs" />
     <Compile Include="Models\Notificacion.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Rol.cs" />
@@ -882,6 +887,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="js\EvtLogin.js" />
+    <Content Include="js\EvtProductos.js" />
     <Content Include="js\EvtUsuarios.js" />
     <Content Include="js\Index.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -978,9 +984,14 @@
     <Content Include="Views\Reportes\Reportes.cshtml" />
     <Content Include="Views\Usuarios\_Usuario.cshtml" />
     <Content Include="Views\Usuarios\_ConsultaUsuarios.cshtml" />
+    <Content Include="Views\Productos\_Producto.cshtml" />
+    <Content Include="Views\Productos\_ConsultaProductos.cshtml" />
+    <Content Include="Views\Inventario\Inventario.cshtml" />
+    <Content Include="Views\Inventario\_Inventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Codigos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
