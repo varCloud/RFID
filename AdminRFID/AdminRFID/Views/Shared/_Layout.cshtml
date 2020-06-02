@@ -70,11 +70,11 @@
 
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
-                    <div class="sidebar-brand">
+                    @*<div class="sidebar-brand">
                         <a href="@Url.Action("index", "DashBoard")">
                             <img style="width:60px; height:53px;" alt="image" src="~/assets/img/logo_64.png" class="header-logo" /> <span class="logo-name"></span>
                         </a>
-                    </div>
+                    </div>*@
                     <div class="sidebar-user">
 
                         <div class="sidebar-user-details">
@@ -84,11 +84,11 @@
                     </div>
                     <ul class="sidebar-menu">
 
-                        <li class="@(ViewBag.Title.ToString() == "Dashboard" ? "dropdown active" : "")">
+                        @*<li class="@(ViewBag.Title.ToString() == "Dashboard" ? "dropdown active" : "")">
                             <a href="@Url.Action("index", "DashBoard")">
                                 <i data-feather="monitor"></i><span>Dashboard</span>
                             </a>
-                        </li>
+                        </li>*@
 
                         <li class="@(ViewBag.Title.ToString() == "Usuarios" ? "dropdown active" : "")">
                             <a href="@Url.Action("Usuarios", "Usuarios")">
@@ -104,13 +104,13 @@
 
                         <li class="@(ViewBag.Title.ToString() == "Inventario" ? "dropdown active" : "")">
                             <a href="@Url.Action("Inventario", "Inventario")">
-                                <i class="fas fa-tasks"></i><span>Inventario</span>
+                                <i class="fas fa-tasks"></i><span>Historico</span>
                             </a>
                         </li>
 
                         <li class="@(ViewBag.Title.ToString() == "Reportes" ? "dropdown active" : "")">
                             <a href="@Url.Action("Reportes", "Reportes")">
-                                <i data-feather="bar-chart-2"></i><span>Reportes</span>
+                                <i data-feather="bar-chart-2"></i><span>Inventario</span>
                             </a>
                         </li>
                     </ul>
