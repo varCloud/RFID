@@ -14,6 +14,8 @@ namespace AdminRFID.Models
         public Boolean activo { get; set; }
         public Int64 cantidad { get; set; }
         public string descipcionExistencias { get; set; }
+        public string codigo { get; set; }
+
 
 
     }

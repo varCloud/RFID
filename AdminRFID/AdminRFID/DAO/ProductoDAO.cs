@@ -59,6 +59,7 @@ namespace AdminRFID.DAO
                     parameters.Add("@idProducto", producto.idProducto == 0 ? (object)null : producto.idProducto);
                     parameters.Add("@tag", producto.tag);
                     parameters.Add("@descripcion", producto.descripcion);
+                    parameters.Add("@codigo", producto.codigo);                    
                     notificacion = db.QuerySingle<Notificacion<string>>("SP_AGREGA_ACTUALIZA_PRODUCTO ", parameters, commandType: CommandType.StoredProcedure);
                 }
 
