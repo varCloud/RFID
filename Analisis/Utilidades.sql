@@ -32,10 +32,12 @@ exec SP_ACTUALIZA_ACITVO_PRODUCTO
 exec SP_OBTENER_PRODUCTOS 4
 /******AFECTA INVENTARIO********************/
 exec SP_AFECTA_INVENTARIO
-@tagId = null
-,@idProducto = 2
+@tagId = 'PEPINO_'
+,@idProducto = null
 ,@cantidad = 250
 ,@TipoInventario = 2
 select * from Productos
 select * from Inventario
 select * from InventarioDetalle
+
+
