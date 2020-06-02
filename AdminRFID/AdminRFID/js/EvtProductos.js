@@ -78,11 +78,11 @@ function ConsultaProducto(idProducto) {
                 $('#TituloModalProducto').html("Agregar Producto");
             $('#modalProducto').modal({ backdrop: 'static', keyboard: false, show: true });
 
-            $('#producto_tag').keyup(function () {
+            $('#codigoBarras').keyup(function () {
                 obtenerCodigos();
             });
 
-            $('#producto_tag').focusout(function () {
+            $('#codigoBarras').focusout(function () {
                 obtenerCodigos();
             });
         },
@@ -174,10 +174,10 @@ function EliminarProducto(idProducto) {
 
 }
 function obtenerCodigos() {
-    if ($('#producto_tag').val() !== '') {
+    if ($('#codigoBarras').val() !== '') {
         $.ajax({
             url: rootUrl("/Productos/ObtenerCodigos"),
-            data: { cadena: $('#producto_tag').val() },
+            data: { cadena: $('#codigoBarras').val() },
             method: 'post',
             dataType: 'json',
             async: false,
