@@ -4,62 +4,81 @@
 
 @{
     Layout = null;
-    List<InventarioDetalle> inventario = Model.Modelo != null ? (List<InventarioDetalle>) Model.Modelo : new List<InventarioDetalle>();
-   
+    List<InventarioDetalle> inventario = Model.Modelo != null ? (List<InventarioDetalle>)Model.Modelo : new List<InventarioDetalle>();
+    int cont = 1;
 }
 
-<div class="section-body">
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped" id="tblInventarioDetalle">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Tag</th>
-                                    <th>Descripciòn</th>
-                                    <th>Cantidad</th>
-                                    <th>Usuario</th>
-                                    <th>Tipo Inventario</th>
-                                    <th>Estatus Inventario</th>
-                                    <th>Fecha Alta</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (InventarioDetalle item in inventario.OrderByDescending(x => x.idInventarioDetalle))
-                                {
-                                <tr>
-                                    <td>@item.idInventarioDetalle</td>
-                                    <td>@item.producto.tag</td>
-                                    <td>@item.producto.descripcion</td>
-                                    <td>@item.producto.cantidad</td>
-                                    <td>@item.usuario.usuario</td>
-                                    <td><div class="badge @Html.Raw(item.tipoInventario==EnumTipoInventario.Entrada ? "badge-dark" : "badge-danger") badge-shadow">@item.tipoInventario.ToString()</div></td>
-                                    <td><div class="badge @Html.Raw(item.estatusInventario==EnumEstatusInventario.Realizado ? "badge-success" : "badge-danger") badge-shadow">@item.estatusInventario.ToString()</div> </td>
-                                    <td>@item.fechaAlta</td>
-                                    <td>
-                                        @if (item.fechaAlta.ToShortDateString() == DateTime.Now.ToShortDateString())
-                                        {
-                                            <div class="buttons">
-                                                <a href="javascript:CancelarInventario(@item.idInventarioDetalle);" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Cancelar"><i class="fas fa-times"></i></a>
-                                            </div>
-                                        }
-                                    </td>
-                                </tr>
-                                }
-                            </tbody>
-                        </table>
+@if (Model.Estatus != 200)
+{
+
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="fas fa-info"></i>
+        </div>
+        <h2>@Model.Mensaje</h2>
+    </div>
+
+}
+else
+{
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="tblInventarioDetalle">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        @*<th>idInventario</th>*@
+                                        <th>Tag</th>
+                                        <th>Descripciòn</th>
+                                        <th>Cantidad</th>
+                                        <th>Usuario</th>
+                                        <th>Tipo Inventario</th>
+                                        <th>Estatus Inventario</th>
+                                        <th>Fecha Alta</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (InventarioDetalle item in inventario)
+                                    {
+                                        <tr>
+                                            <th>@cont</th>
+                                            @*<td>@item.idInventarioDetalle</td>*@
+                                            <td>@item.producto.tag</td>
+                                            <td>@item.producto.descripcion</td>
+                                            <td>@item.producto.cantidad</td>
+                                            <td>@item.usuario.usuario</td>
+                                            <td><div class="badge @Html.Raw(item.tipoInventario == EnumTipoInventario.Entrada ? "badge-dark" : "badge-danger") badge-shadow">@item.tipoInventario.ToString()</div></td>
+                                            <td><div class="badge @Html.Raw(item.estatusInventario == EnumEstatusInventario.Realizado ? "badge-success" : "badge-danger") badge-shadow">@item.estatusInventario.ToString()</div> </td>
+                                            <td>@item.fechaAlta</td>
+                                            <td>
+                                                @if (item.fechaAlta.ToShortDateString() == DateTime.Now.ToShortDateString())
+                                                {
+                                                    <div class="buttons">
+                                                        <a href="javascript:CancelarInventario(@item.idInventarioDetalle,'@item.tipoInventario.ToString()','@item.producto.cantidad');" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Cancelar"><i class="fas fa-times"></i></a>
+                                                    </div>
+                                                }
+                                            </td>
+                                        </tr>
+                                        cont = cont + 1;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-</div>
+
+}
 
 

@@ -1,8 +1,11 @@
 ﻿var tblInventario;
-$(document).ready(function () {
-    InitTableInventario();
-    InitRangePicker('rangeInventario', 'fechaIni', 'fechaFin');
-    $('#rangeInventario').val('');
+$(document).ready(function () {    
+    InitRangePicker('rangeInventario', 'fechaIni', 'fechaFin');    
+    $('#fechaIni').val($('#rangeInventario').data('daterangepicker').startDate.format('YYYY-MM-DD'));
+    $('#fechaFin').val($('#rangeInventario').data('daterangepicker').startDate.format('YYYY-MM-DD'));
+    $("#frmInventarioDetalle").submit();
+    //InitTableInventario();
+    //$('#rangeInventario').val('');
 });
 
 function InitTableInventario() {
@@ -95,7 +98,8 @@ function onBeginSubmitInventario() {
 function onSuccessResultInventario(data) {
     $("#viewInventario").html(data);
     if ($("#tblInventarioDetalle").length > 0) {
-        tblInventario.destroy();
+        if (tblInventario!=null)
+            tblInventario.destroy();
         InitTableInventario();
     }
 
@@ -105,6 +109,48 @@ function onFailureResultInventario() {
     OcultarLoader();
 }
 
+function CancelarInventario(idInventarioDetalle,tipoInventario,cantidad) {
+
+    swal({
+        title: '',
+        text: 'Estas seguro que deseas cancelar la ' + tipoInventario + ' de ' + cantidad + ' productos del inventario?',
+        icon: '',
+        buttons: ["Cancelar", "Aceptar"],
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "/Inventario/CancelaInventario",
+                    data: { idInventarioDetalle: idInventarioDetalle },
+                    method: 'post',
+                    dataType: 'json',
+                    async: true,
+                    beforeSend: function (xhr) {
+                        ShowLoader("Cancelando Inventario...");
+                    },
+                    success: function (data) {
+                        OcultarLoader();
+                        if (data.Estatus == 200) {
+                            MuestraToast("success", data.Mensaje)
+                            tblInventario.destroy();
+                            $("#frmInventarioDetalle").submit();
+                            //PintarTabla();
+                        }
+                        else {
+                            MuestraToast("error", data.Mensaje)
+                        }
+                    },
+                    error: function (xhr, status) {
+                        OcultarLoader();
+                        MuestraToast("error", "Ocurrio un error al cancelar el inventario")
+                    }
+                });
+            }
+        });
+
+
+}
 
 
 //************** REGISTRO DE ENTRADAS Y SALIDAS **************************************//
@@ -225,7 +271,7 @@ function InitInventario() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    dataToPost = JSON.stringify({ listProductos: productos, tipoInventario: $("#idTipoInventario").val() });
+                    dataToPost = JSON.stringify({ listProductos: productos, tipoInventario: $("#idTipoInventario").val(), noPuerta:0 });
 
                     $.ajax({
                         url: rootUrl("/Inventario/AfectaInventario"),
@@ -241,7 +287,8 @@ function InitInventario() {
                             OcultarLoader();
                             if (data.Estatus == 200) {
                                 MuestraToast("success", data.Mensaje);
-                                PintarTabla();
+                                //PintarTabla();
+                                $("#frmInventarioDetalle").submit();
                                 $('#modalInventario').modal('hide');
                             }
                             else

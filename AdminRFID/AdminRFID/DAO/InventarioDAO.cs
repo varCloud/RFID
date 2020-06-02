@@ -16,7 +16,7 @@ namespace AdminRFID.DAO
     public class InventarioDAO
     {
         private IDbConnection db = null;
-        public Notificacion<string> AfectaInventario(EnumTipoInventario tipoInventario, List<Producto> listProductos,int idUsuario)
+        public Notificacion<string> AfectaInventario(EnumTipoInventario tipoInventario, List<Producto> listProductos,int idUsuario,int noPuerta)
         {
 
             Notificacion<string> notificacion = new Notificacion<string>();
@@ -35,6 +35,7 @@ namespace AdminRFID.DAO
                     parameters.Add("@productos", stringBuilder.ToString());
                     parameters.Add("@idUsuario", idUsuario);
                     parameters.Add("@TipoInventario", tipoInventario);
+                    parameters.Add("@noPuerta", noPuerta);
                     notificacion = db.QuerySingle<Notificacion<string>>("SP_AFECTA_INVENTARIO_MASIVO", parameters, commandType: CommandType.StoredProcedure);
                 }
 
@@ -74,6 +75,27 @@ namespace AdminRFID.DAO
                         notificacion.Estatus = r1.Estatus;
                         notificacion.Mensaje = r1.Mensaje;
                     }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return notificacion;
+        }
+
+        public Notificacion<string> CancelarInventario(Int64 idInventarioDetalle)
+        {
+
+            Notificacion<string> notificacion = new Notificacion<string>();
+            try
+            {
+                using (db = new SqlConnection(ConfigurationManager.AppSettings["conexionString"].ToString()))
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@idInventarioDetalle", idInventarioDetalle);
+                    notificacion = db.QuerySingle<Notificacion<string>>("SP_CANCELA_INVENTARIO", parameters, commandType: CommandType.StoredProcedure);
                 }
 
             }

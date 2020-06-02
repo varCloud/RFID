@@ -165,7 +165,7 @@ function EliminarProducto(idProducto) {
                     },
                     error: function (xhr, status) {
                         OcultarLoader();
-                        MuestraToast("error", "Ocurrio un error al actualizar el estatus del usuario")
+                        MuestraToast("error", "Ocurrio un error al actualizar eliminar el producto")
                     }
                 });
             }

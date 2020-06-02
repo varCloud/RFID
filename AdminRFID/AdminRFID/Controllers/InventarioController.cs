@@ -46,12 +46,12 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
-        public ActionResult AfectaInventario(EnumTipoInventario tipoInventario,List<Producto> listProductos)
+        public ActionResult AfectaInventario(EnumTipoInventario tipoInventario,List<Producto> listProductos,int noPuerta)
         {
             try
             {
                 Sesion sesion= Session["UsuarioActual"] as Sesion;
-                Notificacion<string> notificacion = new InventarioDAO().AfectaInventario(tipoInventario, listProductos, sesion.usuario.idUsuario);
+                Notificacion<string> notificacion = new InventarioDAO().AfectaInventario(tipoInventario, listProductos, sesion.usuario.idUsuario, noPuerta);
                 return Json(notificacion,JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -71,11 +71,24 @@ namespace AdminRFID.Controllers
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
+        [HttpPost]
+        public ActionResult CancelaInventario(Int64 idInventarioDetalle)
+        {
+            try
+            {
+                Notificacion<string> notificacion = new InventarioDAO().CancelarInventario(idInventarioDetalle);
+                return Json(notificacion, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
 
 

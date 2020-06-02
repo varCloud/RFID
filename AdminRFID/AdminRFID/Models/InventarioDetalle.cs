@@ -16,6 +16,7 @@ namespace AdminRFID.Models
         public DateTime fechaInicio { get; set; }
         public DateTime fechaFin { get; set; }
         public DateTime fechaAlta { get; set; }
+        public int noPuerta { get; set; }
 
         public InventarioDetalle()
         {
