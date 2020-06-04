@@ -13,6 +13,8 @@ namespace AdminRFID.Models
         public DateTime fechaAlta { get; set; }
         public Boolean activo { get; set; }
         public Int64 cantidad { get; set; }
+        public Int64 cantidadTotalEntradas { get; set; }
+        public Int64 cantidadTotalSalidas { get; set; }
         public string descipcionExistencias { get; set; }
         public string codigo { get; set; }
 

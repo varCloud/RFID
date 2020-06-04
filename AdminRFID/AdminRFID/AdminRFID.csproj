@@ -889,6 +889,7 @@
     <Content Include="js\evtInventario.js" />
     <Content Include="js\EvtLogin.js" />
     <Content Include="js\EvtProductos.js" />
+    <Content Include="js\evtReporteInventario.js" />
     <Content Include="js\EvtUsuarios.js" />
     <Content Include="js\Index.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -990,6 +991,8 @@
     <Content Include="Views\Inventario\Inventario.cshtml" />
     <Content Include="Views\Inventario\_Inventario.cshtml" />
     <Content Include="Views\Inventario\_ObtenerInventario.cshtml" />
+    <Content Include="Views\Reportes\Inventario.cshtml" />
+    <Content Include="Views\Reportes\_ObtenerInventario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,7 +10,7 @@ function onSuccessResult(data) {
     OcultarLoader();
 
     if (data.Estatus == 200) {
-        location.href = rootUrl("Dashboard/Index/");
+        location.href = rootUrl("Usuarios/Usuarios/");
     } else {
         InitRecaptcha();
         MuestraToast("error", data.Mensaje);

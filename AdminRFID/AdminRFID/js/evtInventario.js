@@ -6,6 +6,13 @@ $(document).ready(function () {
     $("#frmInventarioDetalle").submit();
     //InitTableInventario();
     //$('#rangeInventario').val('');
+
+    $("#btnLimpiarForm").click(function (evt) {
+        $("#frmInventarioDetalle").trigger("reset");
+        $('#fechaIni').val('');
+        $('#fechaFin').val('');
+
+    });
 });
 
 function InitTableInventario() {

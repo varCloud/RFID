@@ -1,6 +1,6 @@
 ﻿@using AdminRFID.Models;
 @{
-    ViewBag.Title = "Inventario";
+    ViewBag.Title = "Reportes";
 }
 
 @model InventarioDetalle
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="~/assets/bundles/select2/dist/css/select2.min.css" />
     <link rel="stylesheet" href="~/assets/bundles/bootstrap-daterangepicker/daterangepicker.css" />
 }
-
 
 
 <h2>Inventario</h2>
@@ -27,7 +26,7 @@
             </div>
             <div class="collapse show" id="mycard-collapse">
                 <div class="card-body">
-                    @using (Ajax.BeginForm("_ObtenerInventario", "Inventario",
+                    @using (Ajax.BeginForm("_ObtenerInventario", "Reportes",
                     new AjaxOptions
                     {
                         HttpMethod = "Post",
@@ -35,7 +34,7 @@
                         OnFailure = "onFailureResultInventario",
                         OnSuccess = "onSuccessResultInventario",
                     },
-                    new { id = "frmInventarioDetalle" }))
+                    new { id = "frmInventario" }))
                     {
                         @Html.HiddenFor(x => x.fechaInicio, new { @id = "fechaIni" })
                         @Html.HiddenFor(x => x.fechaFin, new { @id = "fechaFin" })
@@ -48,21 +47,6 @@
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
-                                <div class="form-group">
-                                    <label>Tipo Inventario</label>
-                                    @Html.EnumDropDownListFor(x => x.tipoInventario, "--TODOS--", new { @class = "form-control", data_val = "false" })
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-lg-4">
-                                <div class="form-group">
-                                    <label>Estatus Inventario</label>
-                                    @Html.EnumDropDownListFor(x => x.estatusInventario, "--TODOS--", new { @class = "form-control", data_val = "false" })
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-lg-4">
 
                                 <div class="form-group">
                                     <label>Rango de Fechas</label>
@@ -72,7 +56,7 @@
                                                 <i class="fas fa-calendar"></i>
                                             </div>
                                         </div>
-                                        <input type="text" id="rangeInventario" class="form-control daterange-cus">
+                                        <input type="text" id="rangeInventario" class="form-control daterange-cus" autocomplete="off">
                                     </div>
                                 </div>
 
@@ -91,29 +75,11 @@
 </div>
 
 
-
 <div id="viewInventario">
-    @*@Html.Action("_ObtenerInventario", "Inventario")*@
+    @*@Html.Action("_ObtenerInventario", "Reportes")*@
 </div>
 
 
-<div class="modal fade bd-example-modal-lg" id="modalInventario" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="TituloModalInventario">Agregar Inventario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="viewModalInventario">
-
-
-
-            </div>
-        </div>
-    </div>
-</div>
 
 @section scripts {
     <script src="~/Scripts/jquery.validate.js"></script>
@@ -126,6 +92,8 @@
     <script src="~/assets/js/page/sweetalert.js"></script>
     <script src="~/assets/bundles/select2/dist/js/select2.full.min.js"></script>
     <script src="~/assets/bundles/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="~/js/evtInventario.js"></script>
+    <script src="~/js/evtReporteInventario.js"></script>
 
 }
+
+

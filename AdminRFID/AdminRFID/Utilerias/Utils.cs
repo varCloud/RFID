@@ -28,7 +28,7 @@ namespace AdminRFID.Utilerias
                 writer.Options.PureBarcode = false;
                 img = writer.Write(cadena);
                 img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                img.Save(ObtnerFolderCodigos() + "barras_" + cadena + "_.jpg");
+                //img.Save(ObtnerFolderCodigos() + "barras_" + cadena + "_.jpg");
                 return ms.ToArray();
             }
         }
@@ -43,7 +43,7 @@ namespace AdminRFID.Utilerias
                 writer.Options.Width = 200;
                 img = writer.Write(cadena);
                 img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                img.Save(ObtnerFolderCodigos() + "QR_" + cadena + "_.jpg");
+                //img.Save(ObtnerFolderCodigos() + "QR_" + cadena + "_.jpg");
                 return ms.ToArray();
             }
         }
