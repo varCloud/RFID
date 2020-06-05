@@ -205,6 +205,7 @@
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\ProductoDAO.cs" />
     <Compile Include="DAO\UsuariosDAO.cs" />
+    <Compile Include="Filters\PermisoAttribute.cs" />
     <Compile Include="Filters\SessionTimeout.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -212,6 +213,7 @@
     <Compile Include="Models\Enumeracion.cs" />
     <Compile Include="Models\InventarioDetalle.cs" />
     <Compile Include="Models\Notificacion.cs" />
+    <Compile Include="Models\Permiso.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Sesion.cs" />
