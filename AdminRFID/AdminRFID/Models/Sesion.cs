@@ -17,6 +17,14 @@ namespace AdminRFID.Models
             usuario = new Usuario();
         }
 
+        public static bool TienePermiso(EnumRolesPermisos valor)
+        {
+            HttpContext context = HttpContext.Current;
+            Sesion sesion = (Sesion)context.Session["UsuarioActual"];           
+                      
+            return sesion.usuario.rol.permisos.Where(x =>(EnumRolesPermisos)x.idPermiso == valor).Any();
+        }
+
     }
 
 }

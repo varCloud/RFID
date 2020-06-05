@@ -10,5 +10,12 @@ namespace AdminRFID.Models
         public int idRol { get; set; }
         public string descripcion { get; set; }
 
+        public List<Permiso> permisos { get; set; }
+
+        public Rol()
+        {
+            permisos = new List<Permiso>();
+        }
+
     }
 }

@@ -13,6 +13,7 @@ namespace AdminRFID.Controllers
     public class UsuariosController : Controller
     {
         // GET: Usuario
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_visualizar_usuario)]
         public ActionResult Usuarios()
         {
             try

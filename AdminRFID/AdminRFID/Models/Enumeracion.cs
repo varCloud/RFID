@@ -16,4 +16,31 @@ namespace AdminRFID.Models
         Realizado = 1,
         Cancelado = 2
     }
+
+    public enum EnumRolesPermisos
+    {
+        #region Usuarios
+        Puede_visualizar_usuario = 1,
+        Puede_crear_un_nuevo_usuario=2,
+        Puede_editar_un_usuario=3,
+        Puede_eliminar_un_usuario=4,
+        #endregion
+
+        #region Productos
+        Puede_visualizar_producto = 5,
+        Puede_crear_un_nuevo_producto=6,
+        Puede_editar_un_producto=7,
+        Puede_eliminar_un_producto=8,
+        #endregion
+
+        #region Inventario
+        Puede_visualizar_inventario_historico = 9,
+        Puede_registrar_entradas_y_salidas=10,
+        Puede_cancelar_entradas_y_salidas=11,
+        #endregion
+
+        #region Reportes
+        Puede_visualizar_reporte_inventario = 12
+        #endregion
+    }
 }

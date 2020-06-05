@@ -39,12 +39,15 @@ namespace AdminRFID.DAO
                         n.Estatus = 200;
                         n.Mensaje = "OK";                        
                         n.Modelo = result.Read<Sesion,Usuario,Rol,Sesion>(MapSesion, splitOn:"idUsuario,idRol").First();  
+                        n.Modelo.usuario.rol.permisos = ObtenerPermisosRol(n.Modelo.usuario.rol.idRol);
                     }
                     else {
                         n.Estatus = -1;
                         n.Mensaje = "Datos incorrectos";
                         n.Modelo = sesion;
                     }
+
+                  
                 }
             }
             catch (Exception ex)
@@ -56,9 +59,35 @@ namespace AdminRFID.DAO
 
         public Sesion MapSesion(Sesion s,Usuario u, Rol rol)
         {
-            s.usuario = u;
-            s.usuario.rol = rol;          
+            s.usuario = u;         
+            s.usuario.rol = rol;       
             return s;
+        }
+
+        public List<Permiso> ObtenerPermisosRol(int idRol)
+        {
+
+            List<Permiso> permisos = new List<Permiso>();           
+
+            try
+            {
+                using (db = new SqlConnection(ConfigurationManager.AppSettings["conexionString"].ToString()))
+                {
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@idRol", idRol);
+                    var result = db.QueryMultiple("SP_OBTENER_PERMISOS_ROL ", parameters, commandType: CommandType.StoredProcedure);
+                    var r1 = result.ReadFirst();
+                    if (r1.Estatus == 200)
+                    {
+                        permisos = result.Read<Permiso>().ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return permisos;
         }
     }
 }

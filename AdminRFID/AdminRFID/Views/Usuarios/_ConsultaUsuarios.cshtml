@@ -47,8 +47,15 @@
                                         </td>*@
                                         <td>
                                             <div class="buttons">
-                                                <a href="javascript:ConsultaUsuario(@item.idUsuario);" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Editar"><i class="far fa-edit"></i></a>
-                                                <a href="javascript:EliminarUsuario(@item.idUsuario);" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Eliminar"><i class="fas fa-times"></i></a>
+                                                @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_editar_un_usuario))
+                                                {
+                                                    <a href="javascript:ConsultaUsuario(@item.idUsuario);" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Editar"><i class="far fa-edit"></i></a>
+                                                }
+                                                @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_eliminar_un_usuario))
+                                                {
+                                                    <a href="javascript:EliminarUsuario(@item.idUsuario);" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Eliminar"><i class="fas fa-times"></i></a>
+                                                }
+
                                             </div>
                                         </td>
                                     </tr>
