@@ -13,6 +13,7 @@ namespace AdminRFID.Controllers
     public class InventarioController : Controller
     {
         // GET: Inventario
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_visualizar_inventario_historico)]
         public ActionResult Inventario()
         {
             try
@@ -28,6 +29,7 @@ namespace AdminRFID.Controllers
 
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_registrar_entradas_y_salidas)]
         public ActionResult _Inventario(EnumTipoInventario tipoInventario)
         {
             try
@@ -46,6 +48,7 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_registrar_entradas_y_salidas)]
         public ActionResult AfectaInventario(EnumTipoInventario tipoInventario,List<Producto> listProductos,int noPuerta)
         {
             try
@@ -62,6 +65,7 @@ namespace AdminRFID.Controllers
         }
 
 
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_visualizar_inventario_historico)]
         public ActionResult _ObtenerInventario(InventarioDetalle inventario)
         {
             try
@@ -76,6 +80,7 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_cancelar_entradas_y_salidas)]
         public ActionResult CancelaInventario(Int64 idInventarioDetalle)
         {
             try

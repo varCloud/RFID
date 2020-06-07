@@ -13,6 +13,7 @@ namespace AdminRFID.Controllers
     public class ProductosController : Controller
     {
         // GET: Producto
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_visualizar_producto)]
         public ActionResult Productos()
         {
             try
@@ -28,6 +29,7 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_crear_un_nuevo_producto)]
         public ActionResult _Producto(Producto producto)
         {
             try
@@ -48,6 +50,7 @@ namespace AdminRFID.Controllers
             }
         }
 
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_visualizar_producto)]
         public ActionResult _ConsultaProductos()
         {
             try
@@ -63,6 +66,7 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_crear_un_nuevo_producto)]
         public ActionResult GuardaProducto(Producto producto)
         {
             try
@@ -79,6 +83,7 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_eliminar_un_producto)]
         public ActionResult ActualizaActivoProducto(Producto producto)
         {
             try

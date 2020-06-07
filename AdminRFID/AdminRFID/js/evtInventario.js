@@ -57,23 +57,8 @@ function InitTableInventario() {
         tblInventario.table().container()
     );
 
-    $('#' + NombreTabla + '_filter').append('&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-icon btn-dark" name="" id="btnInventarioEntradas" data-toggle="tooltip" title="Registrar entradas"><i class="fas fa-tasks"></i></a>');
-    $('#' + NombreTabla + '_filter').append('&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-icon btn-danger" name="" id="btnInventarioSalidas" data-toggle="tooltip" title="Registrar salidas"><i class="fas fa-tasks"></i></a>');
-    InitBtnAgregar();
+    $('#' + NombreTabla + '_filter').append($("#DivBtnEntradasSalidas").html());
 }
-
-function InitBtnAgregar() {
-
-    $('#btnInventarioEntradas').click(function (e) {
-        RegistrarInventario(1);
-    });
-
-    $('#btnInventarioSalidas').click(function (e) {
-        RegistrarInventario(2);
-    });
-
-}
-
 
 function PintarTabla() {
     $.ajax({

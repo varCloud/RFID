@@ -19,8 +19,8 @@ namespace AdminRFID.Filters
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {
-                    controller = "Dashboard",
-                    action = "Index"
+                    controller = "Login",
+                    action = "SinPermisos"
                 }));
             }
         }

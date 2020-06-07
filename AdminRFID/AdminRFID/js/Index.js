@@ -84,6 +84,7 @@ function SetHeaderPDF(titulo) {
             {
                 image: logoBase64,
                 width: 64,
+                height: 64,
                 margin: [0, 20, -20, 0]
             },
             /*{

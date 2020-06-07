@@ -35,15 +35,43 @@ namespace AdminRFID.Controllers
                 if (!ReCaptchaPassed(sesion.Token))
                 {
                     ModelState.AddModelError(string.Empty, "Por favor comunicate con el Administrador");
-                    return Json( new Notificacion<object>() {Estatus = -1 , Mensaje = "Error al validar el captcha" }, JsonRequestBehavior.AllowGet);
+                    return Json(new Notificacion<object>() { Estatus = -1, Mensaje = "Error al validar el captcha" }, JsonRequestBehavior.AllowGet);
                 }
 
                 Notificacion<Sesion> n = new LoginDAO().ValidaUsuario(sesion);
                 if (n.Modelo.usuarioValido)
                 {
-                    Session["UsuarioActual"] = n.Modelo;                  
+                    Session["UsuarioActual"] = n.Modelo;
+
+                    if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
+                    {
+                        n.Controller = "Usuarios";
+                        n.Action = "Usuarios";
+                    }   
+                    else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_producto))
+                    {
+                        n.Controller = "Productos";
+                        n.Action = "Productos";
+                    }
+                    else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_inventario_historico))
+                    {
+                        n.Controller = "Inventario";
+                        n.Action = "Inventario";
+                    }            
+                    else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_reporte_inventario))
+                    {
+                        n.Controller = "Reportes";
+                        n.Action = "Inventario";
+                    }                
+                    else
+                    {
+                        n.Controller = "Login";
+                        n.Action = "SinPermisos";
+                    }
+             
 
                 }
+
                 return Json(n, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -53,7 +81,7 @@ namespace AdminRFID.Controllers
 
         }
 
-  
+
         public bool ReCaptchaPassed(string gRecaptchaResponse)
         {
             HttpClient httpClient = new HttpClient();
@@ -74,6 +102,19 @@ namespace AdminRFID.Controllers
             FormsAuthentication.SignOut();
             Session.Abandon();
             return RedirectToAction("Login", "Login");
+        }
+
+        public ActionResult SinPermisos()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

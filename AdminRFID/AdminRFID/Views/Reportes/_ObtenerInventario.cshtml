@@ -11,11 +11,18 @@
 @if (Model.Estatus != 200)
 {
 
-    <div class="empty-state">
-        <div class="empty-state-icon">
-            <i class="fas fa-info"></i>
+    <div class="card card-primary">
+        <div class="card-header">
+            <h4></h4>
         </div>
-        <h2>@Model.Mensaje</h2>
+        <div class="card-body">
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-info"></i>
+                </div>
+                <h2>@Model.Mensaje</h2>
+            </div>
+        </div>
     </div>
 
 }
@@ -31,20 +38,20 @@ else
                         <div class="table-responsive">
                             <table class="table table-striped" id="tblInventario">
                                 <thead>
-                                    <tr>                                       
+                                    <tr>
                                         <th>Tag</th>
                                         <th>Descripciòn</th>
                                         <th>Total de productos entrantes</th>
                                         <th>Total de productos salientes</th>
-                                        <th>Cantidad a la Fecha</th>                                        
+                                        <th>Cantidad a la Fecha</th>
                                         <th>Fecha Actualización</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (Producto item in inventario)
                                     {
-                                        <tr>                         
-                                          
+                                        <tr>
+
                                             <td>@item.tag</td>
                                             <td>@item.descripcion</td>
                                             <td>@item.cantidadTotalEntradas</td>
@@ -52,7 +59,7 @@ else
                                             <td>@item.cantidad</td>
                                             <td>@item.fechaAlta.ToShortDateString()</td>
                                         </tr>
-                               
+
                                     }
                                 </tbody>
                             </table>

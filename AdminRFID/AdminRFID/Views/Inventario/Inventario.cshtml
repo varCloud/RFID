@@ -16,6 +16,13 @@
 
 <h2>Inventario</h2>
 
+<div id="DivBtnEntradasSalidas" style="display: none">
+    @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_registrar_entradas_y_salidas))
+    {
+       <a href="#" class="btn btn-icon btn-dark"  data-toggle="tooltip" title="Registrar entradas" onclick="RegistrarInventario(1)"><i class="fas fa-tasks"></i></a>
+       <a href="#" class="btn btn-icon btn-danger"  data-toggle="tooltip" title="Registrar salidas" onclick="RegistrarInventario(2)"><i class="fas fa-tasks"></i></a>
+    }
+</div>
 <div class="row">
     <div class="col-12 col-sm-12 col-lg-12">
         <div class="card">

@@ -13,11 +13,8 @@ namespace AdminRFID.Controllers
     public class ReportesController : Controller
     {
         // GET: Reportes
-        public ActionResult Reportes()
-        {
-            return View();
-        }
 
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_visualizar_reporte_inventario)]
         public ActionResult Inventario()
         {
             try
@@ -31,7 +28,7 @@ namespace AdminRFID.Controllers
             }
         }
 
-
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_visualizar_reporte_inventario)]
         public ActionResult _ObtenerInventario(InventarioDetalle i)
         {
             try

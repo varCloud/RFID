@@ -1,4 +1,5 @@
-﻿@{AdminRFID.Models.Sesion sesion = Session["UsuarioActual"] as AdminRFID.Models.Sesion; }
+﻿@using AdminRFID.Models;
+@{AdminRFID.Models.Sesion sesion = Session["UsuarioActual"] as AdminRFID.Models.Sesion; }
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +19,8 @@
     <link rel='shortcut icon' type='image/x-icon' href='~/assets/img/logo_64.png' />
     <link href="~/assets/css/loader.css" rel="stylesheet" />
     @RenderSection("Styles", false)
-    <script>
-        var pathServer = '@Url.Content("~/assets/img/logo_1.png")';
+<script>
+         var pathServer = '@Url.Content("~/assets/img/logo.png")';
         function rootUrl(url) {
             var _rootUrl = '@Url.Content("~")';
             var x = url;
@@ -29,7 +30,7 @@
             }
             return x;
         };
-    </script>
+</script>
 </head>
 <body>
     <div id="loader-comercializadora">
@@ -85,34 +86,48 @@
                     <ul class="sidebar-menu">
 
                         @*<li class="@(ViewBag.Title.ToString() == "Dashboard" ? "dropdown active" : "")">
-                            <a href="@Url.Action("index", "DashBoard")">
-                                <i data-feather="monitor"></i><span>Dashboard</span>
-                            </a>
-                        </li>*@
+            <a href="@Url.Action("index", "DashBoard")">
+                <i data-feather="monitor"></i><span>Dashboard</span>
+            </a>
+        </li>*@
 
-                        <li class="@(ViewBag.Title.ToString() == "Usuarios" ? "dropdown active" : "")">
-                            <a href="@Url.Action("Usuarios", "Usuarios")">
-                                <i data-feather="users"></i><span>Usuarios</span>
-                            </a>
-                        </li>
+                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
+                        {
+                            <li class="@(ViewBag.Title.ToString() == "Usuarios" ? "dropdown active" : "")">
+                                <a href="@Url.Action("Usuarios", "Usuarios")">
+                                    <i data-feather="users"></i><span>Usuarios</span>
+                                </a>
+                            </li>
 
-                        <li class="@(ViewBag.Title.ToString() == "Productos" ? "dropdown active" : "")">
-                            <a href="@Url.Action("Productos", "Productos")">
-                                <i data-feather="package"></i><span>Productos</span>
-                            </a>
-                        </li>
+                        }
 
-                        <li class="@(ViewBag.Title.ToString() == "Inventario" ? "dropdown active" : "")">
-                            <a href="@Url.Action("Inventario", "Inventario")">
-                                <i class="fas fa-tasks"></i><span>Historico</span>
-                            </a>
-                        </li>
+                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_producto))
+                        {
+                            <li class="@(ViewBag.Title.ToString() == "Productos" ? "dropdown active" : "")">
+                                <a href="@Url.Action("Productos", "Productos")">
+                                    <i data-feather="package"></i><span>Productos</span>
+                                </a>
+                            </li>
+                        }
 
-                        <li class="@(ViewBag.Title.ToString() == "Reportes" ? "dropdown active" : "")">
-                            <a href="@Url.Action("Inventario", "Reportes")">
-                                <i data-feather="bar-chart-2"></i><span>Inventario</span>
-                            </a>
-                        </li>
+                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_inventario_historico))
+                        {
+                            <li class="@(ViewBag.Title.ToString() == "Inventario" ? "dropdown active" : "")">
+                                <a href="@Url.Action("Inventario", "Inventario")">
+                                    <i class="fas fa-tasks"></i><span>Historico</span>
+                                </a>
+                            </li>
+                        }
+
+                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_reporte_inventario))
+                        {
+                            <li class="@(ViewBag.Title.ToString() == "Reportes" ? "dropdown active" : "")">
+                                <a href="@Url.Action("Inventario", "Reportes")">
+                                    <i data-feather="bar-chart-2"></i><span>Inventario</span>
+                                </a>
+                            </li>
+                        }
+
                     </ul>
                 </aside>
             </div>

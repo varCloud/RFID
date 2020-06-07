@@ -29,6 +29,7 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_crear_un_nuevo_usuario)]
         public ActionResult _Usuario(Usuario usuario)
         {
             try
@@ -49,6 +50,7 @@ namespace AdminRFID.Controllers
             }
         }
 
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_visualizar_usuario)]
         public ActionResult _ConsultaUsuarios()
         {
             try
@@ -64,6 +66,7 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_crear_un_nuevo_usuario)]
         public ActionResult GuardarUsuario(Usuario usuario)
         {
             try
@@ -80,6 +83,7 @@ namespace AdminRFID.Controllers
         }
 
         [HttpPost]
+        [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_eliminar_un_usuario)]
         public ActionResult ActualizaActivoUsuario(Usuario usuario)
         {
             try

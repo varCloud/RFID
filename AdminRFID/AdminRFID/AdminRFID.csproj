@@ -62,6 +62,9 @@
       <HintPath>..\packages\Magick.NET-Q16-x86.7.15.5\lib\net40\Magick.NET-Q16-x86.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
     </Reference>
@@ -149,9 +152,6 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
@@ -950,9 +950,6 @@
     </Content>
     <None Include="Connected Services\servicioTimbrarPruebas\timbraCFDI1.wsdl" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
-    <None Include="Resources\archivopfx.pfx" />
-    <None Include="Resources\CerProductivo.cer" />
-    <None Include="Resources\keyProductivo.key" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -985,7 +982,6 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Productos\Productos.cshtml" />
     <Content Include="Views\Usuarios\Usuarios.cshtml" />
-    <Content Include="Views\Reportes\Reportes.cshtml" />
     <Content Include="Views\Usuarios\_Usuario.cshtml" />
     <Content Include="Views\Usuarios\_ConsultaUsuarios.cshtml" />
     <Content Include="Views\Productos\_Producto.cshtml" />
@@ -995,9 +991,11 @@
     <Content Include="Views\Inventario\_ObtenerInventario.cshtml" />
     <Content Include="Views\Reportes\Inventario.cshtml" />
     <Content Include="Views\Reportes\_ObtenerInventario.cshtml" />
+    <Content Include="Views\Login\SinPermisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1016,6 +1014,7 @@
     <EmbeddedResource Include="Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

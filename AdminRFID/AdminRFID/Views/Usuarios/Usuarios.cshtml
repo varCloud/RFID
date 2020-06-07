@@ -1,4 +1,4 @@
-﻿
+﻿@using AdminRFID.Models;
 @{
     ViewBag.Title = "Usuarios";
 }
@@ -9,6 +9,13 @@
 }
 
 <h2>Usuarios</h2>
+
+<div id="DivBtnNuevoUsuario" style="display: none">
+    @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_crear_un_nuevo_usuario))
+    {
+    <a href="#" class="btn btn-icon btn-primary" onclick="ConsultaUsuario()" data-toggle="tooltip" title="Agregar Usuario"><i class="fas fa-plus"></i></a>
+    }
+</div>
 
 <div id="viewUsuarios">
     @Html.Action("_ConsultaUsuarios", "Usuarios")

@@ -9,6 +9,8 @@ namespace AdminRFID.Models
     {
         public int Estatus { get; set; }
         public string Mensaje { get; set; }
+        public string Controller { get; set; }
+        public string Action { get; set; }
         public T Modelo { get; set; }
     }
 }

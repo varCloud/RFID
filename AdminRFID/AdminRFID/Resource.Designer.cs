@@ -59,35 +59,5 @@ namespace AdminRFID {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Byte[].
-        /// </summary>
-        internal static byte[] archivopfx {
-            get {
-                object obj = ResourceManager.GetObject("archivopfx", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Byte[].
-        /// </summary>
-        internal static byte[] CerProductivo {
-            get {
-                object obj = ResourceManager.GetObject("CerProductivo", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Byte[].
-        /// </summary>
-        internal static byte[] keyProductivo {
-            get {
-                object obj = ResourceManager.GetObject("keyProductivo", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

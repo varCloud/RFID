@@ -6,18 +6,31 @@
     Layout = null;
     List<InventarioDetalle> inventario = Model.Modelo != null ? (List<InventarioDetalle>)Model.Modelo : new List<InventarioDetalle>();
     int cont = 1;
+    Boolean Puede_cancelar_entradas_y_salidas = Sesion.TienePermiso(EnumRolesPermisos.Puede_cancelar_entradas_y_salidas);
 }
 
 @if (Model.Estatus != 200)
 {
-
-    <div class="empty-state">
-        <div class="empty-state-icon">
-            <i class="fas fa-info"></i>
+    <div class="card card-primary">
+        <div class="card-header">
+            <h4></h4>
+            <div class="card-header-action">
+                @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_registrar_entradas_y_salidas))
+                {
+                    <a href="#" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Registrar entradas" onclick="RegistrarInventario(1)"><i class="fas fa-tasks"></i></a>
+                    <a href="#" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Registrar salidas" onclick="RegistrarInventario(2)"><i class="fas fa-tasks"></i></a>
+                }
+            </div>
         </div>
-        <h2>@Model.Mensaje</h2>
+        <div class="card-body">
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-info"></i>
+                </div>
+                <h2>@Model.Mensaje</h2>
+            </div>
+        </div>
     </div>
-
 }
 else
 {
@@ -41,7 +54,10 @@ else
                                         <th>Tipo Inventario</th>
                                         <th>Estatus Inventario</th>
                                         <th>Fecha Alta</th>
-                                        <th>Acciones</th>
+                                        @if (Puede_cancelar_entradas_y_salidas)
+                                        {
+                                            <th>Acciones</th>
+                                        }
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,14 +73,17 @@ else
                                             <td><div class="badge @Html.Raw(item.tipoInventario == EnumTipoInventario.Entrada ? "badge-dark" : "badge-danger") badge-shadow">@item.tipoInventario.ToString()</div></td>
                                             <td><div class="badge @Html.Raw(item.estatusInventario == EnumEstatusInventario.Realizado ? "badge-success" : "badge-danger") badge-shadow">@item.estatusInventario.ToString()</div> </td>
                                             <td>@item.fechaAlta</td>
-                                            <td>
-                                                @if (item.fechaAlta.ToShortDateString() == DateTime.Now.ToShortDateString())
-                                                {
-                                                    <div class="buttons">
-                                                        <a href="javascript:CancelarInventario(@item.idInventarioDetalle,'@item.tipoInventario.ToString()','@item.producto.cantidad');" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Cancelar"><i class="fas fa-times"></i></a>
-                                                    </div>
-                                                }
-                                            </td>
+                                            @if (Puede_cancelar_entradas_y_salidas)
+                                            {
+                                                <td>
+                                                    @if (item.fechaAlta.ToShortDateString() == DateTime.Now.ToShortDateString())
+                                                    {
+                                                        <div class="buttons">
+                                                            <a href="javascript:CancelarInventario(@item.idInventarioDetalle,'@item.tipoInventario.ToString()','@item.producto.cantidad');" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Cancelar"><i class="fas fa-times"></i></a>
+                                                        </div>
+                                                    }
+                                                </td>
+                                            }
                                         </tr>
                                         cont = cont + 1;
                                     }

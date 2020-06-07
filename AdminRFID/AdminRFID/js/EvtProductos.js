@@ -45,16 +45,10 @@ function InitTableProductos() {
         tblProductos.table().container()
     );
 
-    $('#' + NombreTabla + '_filter').append('&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-icon btn-primary" name="" id="btnAgregarProducto" data-toggle="tooltip" title="Agregar Producto"><i class="fas fa-plus"></i></a>');
-     InitBtnAgregar();
+    $('#' + NombreTabla + '_filter').append('&nbsp;&nbsp;&nbsp;' + $("#DivBtnNuevoProducto").html());
+
 }
 
-function InitBtnAgregar() {
-    $('#btnAgregarProducto').click(function (e) {
-        ConsultaProducto();
-
-    });
-}
 
 function ConsultaProducto(idProducto) {
     $.ajax({
