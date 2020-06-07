@@ -190,11 +190,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Connected Services\servicioTimbrarPruebas\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -871,15 +866,6 @@
     <Content Include="assets\js\page\widget-chart.js" />
     <Content Include="assets\js\page\widget-data.js" />
     <Content Include="assets\js\scripts.js" />
-    <Content Include="Connected Services\servicioTimbrarPruebas\AdminRFID.servicioTimbrarPruebas.respuestaTimbrado.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Connected Services\servicioTimbrarPruebas\configuration91.svcinfo" />
-    <None Include="Connected Services\servicioTimbrarPruebas\configuration.svcinfo" />
-    <None Include="Connected Services\servicioTimbrarPruebas\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -948,7 +934,6 @@
     <Content Include="app.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="Connected Services\servicioTimbrarPruebas\timbraCFDI1.wsdl" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -1019,9 +1004,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\servicioTimbrarPruebas\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
