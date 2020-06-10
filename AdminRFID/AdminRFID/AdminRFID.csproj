@@ -986,6 +986,7 @@
     <Content Include="Views\Reportes\_ObtenerInventario.cshtml" />
     <Content Include="Views\Login\SinPermisos.cshtml" />
     <Content Include="Views\Dashboard\_Grafico.cshtml" />
+    <Content Include="Views\Productos\PdfCodigos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

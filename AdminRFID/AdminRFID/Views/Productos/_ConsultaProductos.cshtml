@@ -6,6 +6,7 @@
     List<Producto> productos = Model.Modelo != null ? Model.Modelo : new List<Producto>();
     Boolean Puede_editar_un_producto = Sesion.TienePermiso(EnumRolesPermisos.Puede_editar_un_producto);
     Boolean Puede_eliminar_un_producto = Sesion.TienePermiso(EnumRolesPermisos.Puede_eliminar_un_producto);
+    Boolean puede_imprimir_codigos= Sesion.TienePermiso(EnumRolesPermisos.Puede_imprimir_codigos_productos);
 
 }
 
@@ -25,9 +26,10 @@
                                     </th>
                                     <th>Tag</th>
                                     <th>Descripciòn</th>
-                                    <th>Cantidad</th>
+                                    <th>Cantidad</th> 
+                                    <th>Código de Barras</th>
                                     <th>Fecha Alta</th>
-                                    @if (Puede_editar_un_producto || Puede_eliminar_un_producto)
+                                    @if (Puede_editar_un_producto || Puede_eliminar_un_producto || puede_imprimir_codigos)
                                     {
                                         <th>Acciones</th>
                                     }
@@ -42,6 +44,7 @@
                                     <td>@item.tag</td>
                                     <td>@item.descripcion</td>
                                     <td>@item.cantidad</td>
+                                    <td>@item.codigo</td>
                                     <td>@item.fechaAlta.ToShortDateString()</td>
 
                                     @*<td>
@@ -50,13 +53,17 @@
                 <span class="custom-switch-indicator"></span>
             </label>
         </td>*@
-                                    @if (Puede_editar_un_producto || Puede_eliminar_un_producto)
+                                    @if (Puede_editar_un_producto || Puede_eliminar_un_producto || puede_imprimir_codigos)
                                     {
                                         <td>
                                             <div class="buttons">
                                                 @if (Puede_editar_un_producto)
                                                 {
                                                     <a href="javascript:ConsultaProducto(@item.idProducto);" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Editar"><i class="far fa-edit"></i></a>
+                                                }
+                                                @if (puede_imprimir_codigos)
+                                                {
+                                                    <a href="@Url.Action("PdfCodigos", "Productos", new {codigo=item.codigo,Producto=item.descripcion })" class="btn btn-icon btn-success @Html.Raw(string.IsNullOrEmpty(item.codigo) ? "disabled" : "")" data-toggle="tooltip" title="Imprimir Códigos" target="_blank"><i class="fas fa-qrcode"></i></a>
                                                 }
                                                 @if (Puede_eliminar_un_producto)
                                                 {

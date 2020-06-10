@@ -27,11 +27,30 @@ namespace AdminRFID.Utilerias
                 writer.Options.Width = 280;
                 writer.Options.PureBarcode = false;
                 img = writer.Write(cadena);
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 //img.Save(ObtnerFolderCodigos() + "barras_" + cadena + "_.jpg");
                 return ms.ToArray();
             }
         }
+
+        public static string SaveCodigoBarras(string cadena)
+        {
+            System.Drawing.Image img = null;
+            string nameFile = ObtnerFolderCodigos() + "barras_" + cadena + "_.png";
+            DeleteFile(nameFile);
+            using (var ms = new MemoryStream())
+            {
+                var writer = new ZXing.BarcodeWriter() { Format = BarcodeFormat.CODE_128 };
+                writer.Options.Height = 80;
+                writer.Options.Width = 280;
+                writer.Options.PureBarcode = false;
+                img = writer.Write(cadena);
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                img.Save(nameFile);
+                return nameFile;
+            }
+        }
+
 
         public static byte[] GenerarQR(string cadena)
         {
@@ -42,9 +61,26 @@ namespace AdminRFID.Utilerias
                 writer.Options.Height = 200;
                 writer.Options.Width = 200;
                 img = writer.Write(cadena);
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 //img.Save(ObtnerFolderCodigos() + "QR_" + cadena + "_.jpg");
                 return ms.ToArray();
+            }
+        }
+
+        public static string SaveCodigoQR(string cadena)
+        {
+            System.Drawing.Image img = null;
+            string NameFile = ObtnerFolderCodigos() + "QR_" + cadena + "_.png";
+            DeleteFile(NameFile);
+            using (var ms = new MemoryStream())
+            {
+                var writer = new BarcodeWriter() { Format = BarcodeFormat.QR_CODE };
+                writer.Options.Height = 200;
+                writer.Options.Width = 200;
+                img = writer.Write(cadena);
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                img.Save(NameFile);
+                return NameFile;
             }
         }
 
@@ -53,7 +89,8 @@ namespace AdminRFID.Utilerias
             string ruta = string.Empty;
             try
             {
-                ruta = HttpContext.Current.Server.MapPath("~" + WebConfigurationManager.AppSettings["pathPdfCodigos"].ToString());
+                ruta = Path.Combine("/Codigos/");
+                ruta = HttpContext.Current.Server.MapPath("~" + ruta);
                 DateTime fecha = System.DateTime.Now;
 
                 if (!Directory.Exists(ruta))
@@ -66,8 +103,9 @@ namespace AdminRFID.Utilerias
             return ruta;
         }
 
-        public static string GenerarImprimibleCodigos(string path, string articulo, string producto)
+        public static byte[] GenerarImprimibleCodigos(string codigo,string producto)
         {
+            byte[] content = null;
             string TamañoLetra = "10px";
             string cssTabla = @"style='text-align:center;font-size:" + TamañoLetra + ";font-family:Arial; color:#3E3E3E'";
             string cabeceraTablas = "bgcolor='#404040' style='font-weight:bold; text-align:center; color:white'";
@@ -77,10 +115,12 @@ namespace AdminRFID.Utilerias
             PdfWriter PDFWriter = PdfWriter.GetInstance(document, memStream);
             ItextEvents eventos = new ItextEvents();
             eventos.TituloCabecera = "Códigos del Producto: ";
-            Utilerias.Utils.GenerarQR(articulo);
-            Utilerias.Utils.GenerarCodigoBarras(articulo);
+            string UrlcodigoQR= Utilerias.Utils.SaveCodigoQR(codigo);
+            string UrlcodigoBarras= Utilerias.Utils.SaveCodigoBarras(codigo);
             int renglonesQR = 5;
             int renglonesBarras = 10;
+            //Uri baseUri = new Uri("data:image/png;base64," + codigoQR);
+            //Uri baseUriBarras = new Uri("data:image/png;base64," + codigoBarras);         
 
             //PDFWriter.PageEvent = eventos;
             try
@@ -99,10 +139,10 @@ namespace AdminRFID.Utilerias
                 for (int i = 0; i < renglonesQR; i++)
                 {
                     html += @"<tr>";
-                    html += @"   <td><img src='" + Path.Combine(path, "QR_" + articulo + "_.jpg") + @"' width = '150' height = '150' align='right' /></td>";
-                    html += @"   <td><img src='" + Path.Combine(path, "QR_" + articulo + "_.jpg") + @"' width = '150' height = '150' align='right' /></td>";
-                    html += @"   <td><img src='" + Path.Combine(path, "QR_" + articulo + "_.jpg") + @"' width = '150' height = '150' align='right' /></td>";
-                    html += @"   <td><img src='" + Path.Combine(path, "QR_" + articulo + "_.jpg") + @"' width = '150' height = '150' align='right' /></td>";
+                    html += @"   <td><img src='" + UrlcodigoQR + @"' width = '150' height = '150' align='right' /></td>";
+                    html += @"   <td><img src='" + UrlcodigoQR + @"' width = '150' height = '150' align='right' /></td>";
+                    html += @"   <td><img src='" + UrlcodigoQR + @"' width = '150' height = '150' align='right' /></td>";
+                    html += @"   <td><img src='" + UrlcodigoQR + @"' width = '150' height = '150' align='right' /></td>";
                     html += @"</tr>";
 
                 }
@@ -119,10 +159,9 @@ namespace AdminRFID.Utilerias
                 for (int i = 0; i < renglonesBarras; i++)
                 {
                     html += @"<tr>";
-                    html += @"   <td><img src='" + Path.Combine(path, "barras_" + articulo + "_.jpg") + @"' width = '196' height = '56' align='left' /></td>";
-                    html += @"   <td><img src='" + Path.Combine(path, "barras_" + articulo + "_.jpg") + @"' width = '196' height = '56' align='left' /></td>";
-                    html += @"   <td><img src='" + Path.Combine(path, "barras_" + articulo + "_.jpg") + @"' width = '196' height = '56' align='left' /></td>";
-                    //html += @"   <td><img src='" + Path.Combine(path, "barras_" + articulo + "_.jpg") + @"' width = '210' height = '60' align='right' /></td>";
+                    html += @"   <td><img src='" + UrlcodigoBarras + @"' width = '196' height = '56' align='left' /></td>";
+                    html += @"   <td><img src='" + UrlcodigoBarras + @"' width = '196' height = '56' align='left' /></td>";
+                    html += @"   <td><img src='" + UrlcodigoBarras + @"' width = '196' height = '56' align='left' /></td>";                    
                     html += @"</tr>";
 
                 }
@@ -134,25 +173,39 @@ namespace AdminRFID.Utilerias
                 {
                     document.Add(E);
                 }
-                document.AddAuthor("LLUVIA");
+                document.AddAuthor("RFID");
                 document.AddTitle("Codigos: " + producto);
                 document.AddCreator("Victor Adrian Reyes");
                 document.AddSubject("Codigos de Productos");
                 document.CloseDocument();
                 document.Close();
 
-                byte[] content = memStream.ToArray();
-                using (FileStream fs = File.Create(Path.Combine(path, "Codigos_" + articulo + ".pdf")))
-                {
-                    fs.Write(content, 0, (int)content.Length);
-                }
+                content = memStream.ToArray();
+
+               
+                    DeleteFile(UrlcodigoQR);
+                    DeleteFile(UrlcodigoBarras);
 
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return "Codigos_" + articulo + ".pdf";
+            return content;
+        }
+
+        private static void DeleteFile(string nameFile )
+        {
+            try
+            {
+                if (File.Exists(nameFile))
+                    File.Delete(nameFile);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
 
