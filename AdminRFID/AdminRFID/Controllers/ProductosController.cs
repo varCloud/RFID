@@ -116,5 +116,23 @@ namespace AdminRFID.Controllers
         }
 
 
+        [PermisoAttribute(Permiso=EnumRolesPermisos.Puede_imprimir_codigos_productos)]
+        public ActionResult PdfCodigos(string codigo, string Producto)
+        {
+            Notificacion<String> notificacion = new Notificacion<string>();
+            try
+            {                
+                string pdfCodigos=Convert.ToBase64String(Utilerias.Utils.GenerarImprimibleCodigos(codigo, Producto));
+                ViewBag.pdfBase64 = pdfCodigos;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
     }
 }

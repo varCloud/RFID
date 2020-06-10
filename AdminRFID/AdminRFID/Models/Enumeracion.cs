@@ -47,6 +47,7 @@ namespace AdminRFID.Models
         Puede_crear_un_nuevo_producto=6,
         Puede_editar_un_producto=7,
         Puede_eliminar_un_producto=8,
+        Puede_imprimir_codigos_productos=14,
         #endregion
 
         #region Inventario
@@ -62,5 +63,6 @@ namespace AdminRFID.Models
         #region Dashboard
         Puede_visualizar_dashboard=13
         #endregion
+        
     }
 }
