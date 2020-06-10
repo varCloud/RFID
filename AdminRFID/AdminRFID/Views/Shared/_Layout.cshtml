@@ -97,24 +97,15 @@
 
                         }
 
-                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
+                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_reporte_inventario))
                         {
-                            <li class="@(ViewBag.Title.ToString() == "Usuarios" ? "dropdown active" : "")">
-                                <a href="@Url.Action("Usuarios", "Usuarios")">
-                                    <i data-feather="users"></i><span>Usuarios</span>
-                                </a>
-                            </li>
-
-                        }
-
-                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_producto))
-                        {
-                            <li class="@(ViewBag.Title.ToString() == "Productos" ? "dropdown active" : "")">
-                                <a href="@Url.Action("Productos", "Productos")">
-                                    <i data-feather="package"></i><span>Productos</span>
+                            <li class="@(ViewBag.Title.ToString() == "Reportes" ? "dropdown active" : "")">
+                                <a href="@Url.Action("Inventario", "Reportes")">
+                                    <i data-feather="bar-chart-2"></i><span>Inventario</span>
                                 </a>
                             </li>
                         }
+
 
                         @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_inventario_historico))
                         {
@@ -125,13 +116,26 @@
                             </li>
                         }
 
-                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_reporte_inventario))
+
+                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_producto))
                         {
-                            <li class="@(ViewBag.Title.ToString() == "Reportes" ? "dropdown active" : "")">
-                                <a href="@Url.Action("Inventario", "Reportes")">
-                                    <i data-feather="bar-chart-2"></i><span>Inventario</span>
+                            <li class="@(ViewBag.Title.ToString() == "Productos" ? "dropdown active" : "")">
+                                <a href="@Url.Action("Productos", "Productos")">
+                                    <i data-feather="package"></i><span>Productos</span>
                                 </a>
                             </li>
+                        }
+
+
+
+                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
+                        {
+                            <li class="@(ViewBag.Title.ToString() == "Usuarios" ? "dropdown active" : "")">
+                                <a href="@Url.Action("Usuarios", "Usuarios")">
+                                    <i data-feather="users"></i><span>Usuarios</span>
+                                </a>
+                            </li>
+
                         }
 
                     </ul>

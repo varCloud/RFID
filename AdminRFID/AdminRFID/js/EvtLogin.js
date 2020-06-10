@@ -1,6 +1,7 @@
 ﻿var key;
 function onBeginSubmit() {
     ShowLoader("Cargando...");
+    $("#btnIniciarSesion").addClass('btn-progress disabled');
 }
 function onCompleteSubmit() {
 
@@ -12,6 +13,7 @@ function onSuccessResult(data) {
     if (data.Estatus == 200) {
         location.href = rootUrl("" + data.Controller + "/" + data.Action+"/");
     } else {
+        $("#btnIniciarSesion").removeClass('btn-progress disabled');
         InitRecaptcha();
         MuestraToast("error", data.Mensaje);
     }
@@ -19,6 +21,7 @@ function onSuccessResult(data) {
 
 function onFailureResult() {
     OcultarLoader();
+    $("#btnIniciarSesion").removeClass('btn-progress disabled');
 }
 function InitRecaptcha() {
     var key = '6LfandgUAAAAAC71dmEsGltVDobKPEYFvC_ocuP_';
