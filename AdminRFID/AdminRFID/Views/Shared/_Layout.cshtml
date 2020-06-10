@@ -19,7 +19,7 @@
     <link rel='shortcut icon' type='image/x-icon' href='~/assets/img/logo_64.png' />
     <link href="~/assets/css/loader.css" rel="stylesheet" />
     @RenderSection("Styles", false)
-<script>
+    <script>
          var pathServer = '@Url.Content("~/assets/img/logo.png")';
         function rootUrl(url) {
             var _rootUrl = '@Url.Content("~")';
@@ -30,7 +30,7 @@
             }
             return x;
         };
-</script>
+    </script>
 </head>
 <body>
     <div id="loader-comercializadora">
@@ -72,10 +72,10 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     @*<div class="sidebar-brand">
-                        <a href="@Url.Action("index", "DashBoard")">
-                            <img style="width:60px; height:53px;" alt="image" src="~/assets/img/logo_64.png" class="header-logo" /> <span class="logo-name"></span>
-                        </a>
-                    </div>*@
+                            <a href="@Url.Action("index", "DashBoard")">
+                                <img style="width:60px; height:53px;" alt="image" src="~/assets/img/logo_64.png" class="header-logo" /> <span class="logo-name"></span>
+                            </a>
+                        </div>*@
                     <div class="sidebar-user">
 
                         <div class="sidebar-user-details">
@@ -85,11 +85,17 @@
                     </div>
                     <ul class="sidebar-menu">
 
-                        @*<li class="@(ViewBag.Title.ToString() == "Dashboard" ? "dropdown active" : "")">
-            <a href="@Url.Action("index", "DashBoard")">
-                <i data-feather="monitor"></i><span>Dashboard</span>
-            </a>
-        </li>*@
+                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_dashboard))
+                        {
+
+                            <li class="@(ViewBag.Title.ToString() == "Dashboard" ? "dropdown active" : "")">
+                                <a href="@Url.Action("index", "DashBoard")">
+                                    <i data-feather="monitor"></i><span>Dashboard</span>
+                                </a>
+                            </li>
+
+
+                        }
 
                         @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
                         {
@@ -147,7 +153,6 @@
     <script src="~/assets/bundles/jquery.sparkline.min.js"></script>
     <script src="~/assets/bundles/izitoast/js/iziToast.min.js"></script>
     <!-- Page Specific JS File -->
-   
     <!-- Template JS File -->
     <script src="~/assets/js/scripts.js"></script>
     <!-- Custom JS File -->

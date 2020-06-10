@@ -196,6 +196,7 @@
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="DAO\DashboardDAO.cs" />
     <Compile Include="DAO\InventarioDAO.cs" />
     <Compile Include="DAO\LoginDAO.cs" />
     <Compile Include="DAO\ProductoDAO.cs" />
@@ -206,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Enumeracion.cs" />
+    <Compile Include="Models\Grafico.cs" />
     <Compile Include="Models\InventarioDetalle.cs" />
     <Compile Include="Models\Notificacion.cs" />
     <Compile Include="Models\Permiso.cs" />
@@ -759,6 +761,11 @@
     <Content Include="assets\bundles\flag-icon-css\flags\4x3\zm.svg" />
     <Content Include="assets\bundles\flag-icon-css\flags\4x3\zw.svg" />
     <Content Include="assets\bundles\gmaps.js" />
+    <Content Include="assets\bundles\highcharts\data.js" />
+    <Content Include="assets\bundles\highcharts\drilldown.js" />
+    <Content Include="assets\bundles\highcharts\exporting.js" />
+    <Content Include="assets\bundles\highcharts\highcharts-more.js" />
+    <Content Include="assets\bundles\highcharts\highcharts.js" />
     <Content Include="assets\bundles\ionicons\css\ionicons.min.css" />
     <Content Include="assets\bundles\ionicons\fonts\ionicons28b5.svg" />
     <Content Include="assets\bundles\izitoast\css\iziToast.min.css" />
@@ -874,6 +881,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\EvtDashboard.js" />
     <Content Include="js\evtInventario.js" />
     <Content Include="js\EvtLogin.js" />
     <Content Include="js\EvtProductos.js" />
@@ -977,6 +985,7 @@
     <Content Include="Views\Reportes\Inventario.cshtml" />
     <Content Include="Views\Reportes\_ObtenerInventario.cshtml" />
     <Content Include="Views\Login\SinPermisos.cshtml" />
+    <Content Include="Views\Dashboard\_Grafico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

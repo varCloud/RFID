@@ -1,0 +1,293 @@
+﻿@using System.Globalization;
+@using AdminRFID.Models;
+@model Notificacion<Grafico>
+
+@{
+    /**/
+
+
+    Notificacion<Grafico> grafico = Model;
+    EnumTipoReporteGrafico tipoReporteGrafico = ViewBag.tipoReporteGrafico;
+    EnumTipoGrafico tipoGrafico = ViewBag.tipoGrafico;
+    string titulo;
+}
+
+@if (grafico.Estatus != 200)
+{
+    <div class="empty-state">
+        <div class="empty-state-icon">
+            <i class="fas fa-info"></i>
+        </div>
+        <h2>@grafico.Mensaje</h2>
+    </div>
+}
+else
+{
+
+    switch (tipoGrafico)
+    {
+        case EnumTipoGrafico.EntradasPorFecha:
+            {
+                titulo = Html.Raw(tipoReporteGrafico == EnumTipoReporteGrafico.Semanal ? "ENTRADAS DE INVENTARIO DE LA SEMANA ACTUAL" : "ENTRADAS DE INVENTARIO " + tipoReporteGrafico.ToString().ToUpper()).ToString();
+
+                <div id="graficoEntradasProductos"></div>
+
+                <script type="text/javascript">
+    var data=@Html.Raw(Json.Encode(grafico.Modelo.data))
+    var series=@Html.Raw(Json.Encode(grafico.Modelo.seriesDrilldowns))
+        Highcharts.chart('graficoEntradasProductos', {
+    chart: {
+        type: 'column'
+        },
+        title: {
+        text: @Html.Raw(Json.Encode(titulo))
+        },
+        subtitle: {
+        text: ''
+        },
+        accessibility: {
+        announceNewData: {
+            enabled: true
+            }
+        },
+        xAxis: {
+        type: 'category'
+        },
+        yAxis: {
+        title: {
+            text: ''
+            }
+
+        },
+        legend: {
+        enabled: false
+        },
+        plotOptions: {
+        series: {
+            borderWidth: 0,
+                dataLabels: {
+                enabled: true,
+                    format: '{point.y:.0f}'
+                }
+            }
+        },
+
+        tooltip: {
+        headerFormat: '<span style="font-size:11px">{point.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b><br/>'
+        },
+
+        series: [
+            {
+        name: "Inventario Productos",
+                colorByPoint: true,
+                data: data
+            }
+        ],
+        drilldown: {
+        series: series
+        }
+    });
+                </script>
+
+
+            }
+            break;
+        case EnumTipoGrafico.SalidasPorFecha:
+            {
+                titulo = Html.Raw(tipoReporteGrafico == EnumTipoReporteGrafico.Semanal ? "SALIDAS DE INVENTARIO DE LA SEMANA ACTUAL" : "SALIDAS DE INVENTARIO " + tipoReporteGrafico.ToString().ToUpper()).ToString();
+
+                <div id="graficoSalidasProductos"></div>
+
+                <script type="text/javascript">
+    var data=@Html.Raw(Json.Encode(grafico.Modelo.data))
+    var series=@Html.Raw(Json.Encode(grafico.Modelo.seriesDrilldowns))
+        Highcharts.chart('graficoSalidasProductos', {
+    chart: {
+        type: 'column'
+        },
+        title: {
+        text: @Html.Raw(Json.Encode(titulo))
+        },
+        subtitle: {
+        text: ''
+        },
+        accessibility: {
+        announceNewData: {
+            enabled: true
+            }
+        },
+        xAxis: {
+        type: 'category'
+        },
+        yAxis: {
+        title: {
+            text: ''
+            }
+
+        },
+        legend: {
+        enabled: false
+        },
+        plotOptions: {
+        series: {
+            borderWidth: 0,
+                dataLabels: {
+                enabled: true,
+                    format: '{point.y:.0f}'
+                }
+            }
+        },
+
+        tooltip: {
+        headerFormat: '<span style="font-size:11px">{point.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b><br/>'
+        },
+
+        series: [
+            {
+        name: "Inventario Productos",
+                colorByPoint: true,
+                data: data
+            }
+        ],
+        drilldown: {
+        series: series
+        }
+    });
+                </script>
+
+            }
+            break;
+        case EnumTipoGrafico.TopTenProductosEntrantes:
+            {
+                titulo = "TOP TEN DE ENTRADAS A INVENTARIO";
+
+                <div id="containerTopTenEntradas"></div>
+                <script type="text/javascript">
+    var data=@Html.Raw(Json.Encode(grafico.Modelo.data))
+
+        Highcharts.chart('containerTopTenEntradas', {
+    chart: {
+        type: 'column'
+        },
+        title: {
+        text: @Html.Raw(Json.Encode(titulo))
+        },
+        subtitle: {
+        text: ''
+        },
+        accessibility: {
+        announceNewData: {
+            enabled: true
+            }
+        },
+        xAxis: {
+        type: 'category'
+        },
+        yAxis: {
+        title: {
+            text: ''
+            }
+
+        },
+        legend: {
+        enabled: false
+        },
+        plotOptions: {
+        series: {
+            borderWidth: 0,
+                dataLabels: {
+                enabled: true,
+                    format: '{point.y:.0f}'
+                }
+            }
+        },
+
+        tooltip: {
+        headerFormat: '<span style="font-size:11px">{point.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b><br/>'
+        },
+
+        series: [
+            {
+        name: "Inventario Productos",
+                colorByPoint: true,
+                data: data
+            }
+        ]
+    });
+                </script>
+
+            }
+            break;
+        case EnumTipoGrafico.TopTenProductosSalientes:
+            {
+                titulo = "TOP TEN DE SALIDAS A INVENTARIO ";
+
+                <div id="containerTopTenSalidas"></div>
+
+                <script type="text/javascript">
+    var data=@Html.Raw(Json.Encode(grafico.Modelo.data))
+
+        Highcharts.chart('containerTopTenSalidas', {
+    chart: {
+        type: 'column'
+        },
+        title: {
+        text: @Html.Raw(Json.Encode(titulo))
+        },
+        subtitle: {
+        text: ''
+        },
+        accessibility: {
+        announceNewData: {
+            enabled: true
+            }
+        },
+        xAxis: {
+        type: 'category'
+        },
+        yAxis: {
+        title: {
+            text: ''
+            }
+
+        },
+        legend: {
+        enabled: false
+        },
+        plotOptions: {
+        series: {
+            borderWidth: 0,
+                dataLabels: {
+                enabled: true,
+                    format: '{point.y:.0f}'
+                }
+            }
+        },
+
+        tooltip: {
+        headerFormat: '<span style="font-size:11px">{point.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.0f}</b><br/>'
+        },
+
+        series: [
+            {
+        name: "Inventario Productos",
+                colorByPoint: true,
+                data: data
+            }
+        ]
+    });
+                </script>
+
+
+            }
+            break;
+    }
+
+
+}
+
+

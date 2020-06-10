@@ -43,7 +43,12 @@ namespace AdminRFID.Controllers
                 {
                     Session["UsuarioActual"] = n.Modelo;
 
-                    if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
+                    if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_dashboard))
+                    {
+                        n.Controller = "Dashboard";
+                        n.Action = "Index";
+                    }
+                   else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
                     {
                         n.Controller = "Usuarios";
                         n.Action = "Usuarios";

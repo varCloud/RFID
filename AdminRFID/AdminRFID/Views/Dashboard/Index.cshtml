@@ -1,7 +1,111 @@
-﻿
+﻿@using AdminRFID.Models;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
 }
 
-<h2>Index</h2>
+
+
+<script src="~/assets/bundles/highcharts/highcharts.js"></script>
+<script src="~/assets/bundles/highcharts/data.js"></script>
+<script src="~/assets/bundles/highcharts/drilldown.js"></script>
+<script src="~/assets/bundles/highcharts/exporting.js"></script>
+
+
+<section class="section">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4></h4>
+                    <div class="card-header-action">
+                        <div class="btn active btnGraficoSalidasProductos" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Semanal)">Semana Actual</div>
+                        <div class="btn btnGraficoSalidasProductos" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Mensuales)">Mensuales</div>
+                        <div class="btn btnGraficoSalidasProductos" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Anuales)">Anuales</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="GraficoSalidasProductos">
+                        @Html.Action("_Grafico", "DashBoard", new { tipoGrafico = EnumTipoGrafico.SalidasPorFecha, tipoReporteGrafico = EnumTipoReporteGrafico.Semanal })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4></h4>
+                    <div class="card-header-action">
+                        <div class="btn active btnGraficoEntradasProductos" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Semanal)">Semana Actual</div>
+                        <div class="btn btnGraficoEntradasProductos" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Mensuales)">Mensuales</div>
+                        <div class="btn btnGraficoEntradasProductos" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Anuales)">Anuales</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="GraficoEntradasProductos">
+                        @Html.Action("_Grafico", "DashBoard", new { tipoGrafico = EnumTipoGrafico.EntradasPorFecha, tipoReporteGrafico = EnumTipoReporteGrafico.Semanal })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4></h4>
+                    <div class="card-header-action">
+                        <div class="btn active btnGraficoTopTenEntradas" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Dia)">Hoy</div>
+                        <div class="btn btnGraficoTopTenEntradas" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Semanal)">Esta Semana</div>
+                        <div class="btn btnGraficoTopTenEntradas" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Mensuales)">Este Mes</div>
+                        <div class="btn btnGraficoTopTenEntradas" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Anuales)">Este Año</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="GraficoTopTenEntradas">
+                        @Html.Action("_Grafico", "DashBoard", new { tipoGrafico = EnumTipoGrafico.TopTenProductosEntrantes, tipoReporteGrafico = EnumTipoReporteGrafico.Dia })
+
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4></h4>
+                    <div class="card-header-action">
+                        <div class="btn active btnGraficoTopTenSalidas" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Dia)">Hoy</div>
+                        <div class="btn btnGraficoTopTenSalidas" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Semanal)">Esta Semana</div>
+                        <div class="btn btnGraficoTopTenSalidas" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Mensuales)">Este Mes</div>
+                        <div class="btn btnGraficoTopTenSalidas" tipoReporteGrafico="@Convert.ToInt16(EnumTipoReporteGrafico.Anuales)">Este Año</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="GraficoTopTenSalidas">
+                        @Html.Action("_Grafico", "DashBoard", new { tipoGrafico = EnumTipoGrafico.TopTenProductosSalientes, tipoReporteGrafico = EnumTipoReporteGrafico.Dia })
+
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+@section scripts {
+
+ 
+    <script src="~/js/EvtDashboard.js"></script>
+}
+
+
+
+
 

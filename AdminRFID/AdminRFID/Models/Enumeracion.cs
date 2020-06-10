@@ -17,6 +17,22 @@ namespace AdminRFID.Models
         Cancelado = 2
     }
 
+    public enum EnumTipoGrafico
+    {
+        EntradasPorFecha = 1,
+        SalidasPorFecha = 2,
+        TopTenProductosEntrantes = 3,
+        TopTenProductosSalientes = 4
+    }
+
+    public enum EnumTipoReporteGrafico
+    {
+        Semanal = 1,
+        Mensuales = 2,
+        Anuales = 3,
+        Dia = 4
+    }
+
     public enum EnumRolesPermisos
     {
         #region Usuarios
@@ -40,7 +56,11 @@ namespace AdminRFID.Models
         #endregion
 
         #region Reportes
-        Puede_visualizar_reporte_inventario = 12
+        Puede_visualizar_reporte_inventario = 12,
+        #endregion
+
+        #region Dashboard
+        Puede_visualizar_dashboard=13
         #endregion
     }
 }
