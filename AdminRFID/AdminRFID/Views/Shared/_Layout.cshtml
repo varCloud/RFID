@@ -49,17 +49,33 @@
                             <a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
 									collapse-btn"><i data-feather="align-justify"></i></a>
                         </li>
+                        <li>
+                            <a href="#" class="nav-link nav-link-lg fullscreen-btn">
+                                <i data-feather="maximize"></i>
+                            </a>
+                        </li>
+                        <li>
+                        </li>
                     </ul>
                 </div>
+                <div  class="form-inline mr-auto">
+                    <img src="~/assets/img/logo_letras.png" style="width:100px !important" />
+                </div>
                 <ul class="navbar-nav navbar-right">
+                    <li class="dropdown dropdown-list-toggle">
+                    </li>
+                    <li class="dropdown dropdown-list-toggle">
+                        
+                    </li>
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown"
-                           class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="~/assets/img/logo_64.png"
-                                 class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span>
+                        <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <img alt="image" src="~/assets/img/logo_64.png" class="user-img-radious-style">
+                            <span class="d-sm-none d-lg-inline-block"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pullDown">
-
+                            <div class="dropdown-title">Hello Sarah Smith</div>
+      
+      
                             <a href="@Url.Action("CerrarSesion","Login")" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i>
                                 Salir
@@ -72,10 +88,10 @@
             <div class="main-sidebar sidebar-style-2">
                 <aside id="sidebar-wrapper">
                     @*<div class="sidebar-brand">
-                            <a href="@Url.Action("index", "DashBoard")">
-                                <img style="width:60px; height:53px;" alt="image" src="~/assets/img/logo_64.png" class="header-logo" /> <span class="logo-name"></span>
-                            </a>
-                        </div>*@
+                    <a href="@Url.Action("index", "DashBoard")">
+                        <img style="width:60px; height:53px;" alt="image" src="~/assets/img/logo_64.png" class="header-logo" /> <span class="logo-name"></span>
+                    </a>
+                </div>*@
                     <div class="sidebar-user">
 
                         <div class="sidebar-user-details">
