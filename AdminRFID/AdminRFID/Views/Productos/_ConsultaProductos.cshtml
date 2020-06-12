@@ -26,13 +26,14 @@
                                     </th>
                                     <th>Tag</th>
                                     <th>Descripciòn</th>
-                                    <th>Cantidad</th> 
                                     <th>Código de Barras</th>
                                     <th>Fecha Alta</th>
+                                    <th>Estatus</th>
                                     @if (Puede_editar_un_producto || Puede_eliminar_un_producto || puede_imprimir_codigos)
                                     {
                                         <th>Acciones</th>
                                     }
+
 
                                 </tr>
                             </thead>
@@ -43,9 +44,9 @@
                                     <td>@item.idProducto</td>
                                     <td>@item.tag</td>
                                     <td>@item.descripcion</td>
-                                    <td>@item.cantidad</td>
                                     <td>@item.codigo</td>
                                     <td>@item.fechaAlta.ToShortDateString()</td>
+                                    <td>@item.ultimoEstatusInventario</td>
 
                                     @*<td>
             <label>

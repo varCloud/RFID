@@ -85,7 +85,8 @@ namespace AdminRFID.Controllers
         {
             try
             {
-                Notificacion<string> notificacion = new InventarioDAO().CancelarInventario(idInventarioDetalle);
+                Sesion sesion= Session["UsuarioActual"] as Sesion;
+                Notificacion<string> notificacion = new InventarioDAO().CancelarInventario(idInventarioDetalle, sesion.usuario.idUsuario);
                 return Json(notificacion, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

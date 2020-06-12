@@ -3,13 +3,18 @@
     ViewBag.Title = "Inventario";
 }
 
-@model InventarioDetalle
+
+
+@{ 
+    InventarioDetalle inventario = new InventarioDetalle();
+    inventario.tipoInventario = EnumTipoInventario.Todos;
+}
 
 @section Styles {
     <link rel="stylesheet" href="~/assets/bundles/datatables/datatables.min.css">
     <link rel="stylesheet" href="~/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="~/assets/bundles/select2/dist/css/select2.min.css" />
-    <link rel="stylesheet" href="~/assets/bundles/bootstrap-daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="~/assets/bundles/bootstrap-daterangepicker/daterangepicker.css" />    
 }
 
 
@@ -20,8 +25,8 @@
 <div id="DivBtnEntradasSalidas" style="display: none">
     @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_registrar_entradas_y_salidas))
     {
-       <a href="#" class="btn btn-icon btn-dark"  data-toggle="tooltip" title="Registrar entradas" onclick="RegistrarInventario(1)"><i class="fas fa-tasks"></i></a>
-       <a href="#" class="btn btn-icon btn-danger"  data-toggle="tooltip" title="Registrar salidas" onclick="RegistrarInventario(2)"><i class="fas fa-tasks"></i></a>
+       <a href="#" class="btn btn-icon btn-dark"  data-toggle="tooltip" title="Registrar entradas" onclick="RegistrarInventario(2)"><i class="fas fa-tasks"></i></a>
+       <a href="#" class="btn btn-icon btn-danger"  data-toggle="tooltip" title="Registrar salidas" onclick="RegistrarInventario(3)"><i class="fas fa-tasks"></i></a>
     }
 </div>
 <div class="row">
@@ -45,26 +50,26 @@
                     },
                     new { id = "frmInventarioDetalle" }))
                     {
-                        @Html.HiddenFor(x => x.fechaInicio, new { @id = "fechaIni" })
-                        @Html.HiddenFor(x => x.fechaFin, new { @id = "fechaFin" })
+                        @Html.HiddenFor(x => inventario.fechaInicio, new { @id = "fechaIni" })
+                        @Html.HiddenFor(x => inventario.fechaFin, new { @id = "fechaFin" })
 
                         <div class="row">
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <div class="form-group">
                                     <label>Tag del producto</label>
-                                    @Html.TextBoxFor(x => x.producto.tag, null, new { @class = "form-control", data_val = "false" })
+                                    @Html.TextBoxFor(x => inventario.producto.tag, null, new { @class = "form-control", data_val = "false" })
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <div class="form-group">
                                     <label>Tipo Inventario</label>
-                                    @Html.EnumDropDownListFor(x => x.tipoInventario, "--TODOS--", new { @class = "form-control", data_val = "false" })
+                                    @Html.EnumDropDownListFor(x => inventario.tipoInventario, new { @class = "form-control", data_val = "false" })
                                 </div>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <div class="form-group">
                                     <label>Estatus Inventario</label>
-                                    @Html.EnumDropDownListFor(x => x.estatusInventario, "--TODOS--", new { @class = "form-control", data_val = "false" })
+                                    @Html.EnumDropDownListFor(x => inventario.estatusInventario, "--TODOS--", new { @class = "form-control", data_val = "false" })
                                 </div>
                             </div>
                         </div>

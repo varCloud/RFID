@@ -57,7 +57,7 @@ namespace AdminRFID.DAO
                 {
                     var parameters = new DynamicParameters();
                     parameters.Add("@tagProducto", string.IsNullOrEmpty(i.producto.tag)? (object)null : i.producto.tag);
-                    parameters.Add("@idCatTipoInventario", i.tipoInventario == 0 ? (object)null : i.tipoInventario);
+                    parameters.Add("@idCatTipoInventario", i.tipoInventario == EnumTipoInventario.Todos ? (object)null : i.tipoInventario);
                     parameters.Add("@idEstatusInventario", i.estatusInventario == 0 ? (object)null : i.estatusInventario);
                     parameters.Add("@idUsuario", i.usuario.idUsuario == 0 ? (object)null : i.usuario.idUsuario);
                     parameters.Add("@fechaInicio", i.fechaInicio == DateTime.MinValue ? (object)null : i.fechaInicio);
@@ -85,7 +85,7 @@ namespace AdminRFID.DAO
             return notificacion;
         }
 
-        public Notificacion<string> CancelarInventario(Int64 idInventarioDetalle)
+        public Notificacion<string> CancelarInventario(Int64 idInventarioDetalle,Int64 idUsuario)
         {
 
             Notificacion<string> notificacion = new Notificacion<string>();
@@ -95,6 +95,7 @@ namespace AdminRFID.DAO
                 {
                     var parameters = new DynamicParameters();
                     parameters.Add("@idInventarioDetalle", idInventarioDetalle);
+                    parameters.Add("@idUsuario", idUsuario);
                     notificacion = db.QuerySingle<Notificacion<string>>("SP_CANCELA_INVENTARIO", parameters, commandType: CommandType.StoredProcedure);
                 }
 
@@ -115,8 +116,8 @@ namespace AdminRFID.DAO
                 using (db = new SqlConnection(ConfigurationManager.AppSettings["conexionString"].ToString()))
                 {
                     var parameters = new DynamicParameters();
-                    parameters.Add("@tagProducto", string.IsNullOrEmpty(i.producto.tag) ? (object)null : i.producto.tag);
-                    parameters.Add("@fechaInicio", i.fechaInicio == DateTime.MinValue ? (object)null : i.fechaInicio);
+                    parameters.Add("@DescripcionProducto", string.IsNullOrEmpty(i.producto.descripcion) ? (object)null : i.producto.descripcion);
+                    parameters.Add("@fechaIni", i.fechaInicio == DateTime.MinValue ? (object)null : i.fechaInicio);
                     parameters.Add("@fechaFin", i.fechaFin == DateTime.MinValue ? (object)null : i.fechaFin);
                     var result = db.QueryMultiple("SP_OBTENER_INVENTARIO_GENERAL ", parameters, commandType: CommandType.StoredProcedure);
                     var r1 = result.ReadFirst();

@@ -48,7 +48,17 @@ namespace AdminRFID.Controllers
                         n.Controller = "Dashboard";
                         n.Action = "Index";
                     }
-                   else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
+                    else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_reporte_inventario))
+                    {
+                        n.Controller = "Reportes";
+                        n.Action = "Inventario";
+                    }
+                    else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_inventario_historico))
+                    {
+                        n.Controller = "Inventario";
+                        n.Action = "Inventario";
+                    }
+                    else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_usuario))
                     {
                         n.Controller = "Usuarios";
                         n.Action = "Usuarios";
@@ -57,17 +67,8 @@ namespace AdminRFID.Controllers
                     {
                         n.Controller = "Productos";
                         n.Action = "Productos";
-                    }
-                    else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_inventario_historico))
-                    {
-                        n.Controller = "Inventario";
-                        n.Action = "Inventario";
-                    }            
-                    else if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_reporte_inventario))
-                    {
-                        n.Controller = "Reportes";
-                        n.Action = "Inventario";
-                    }                
+                    }                      
+                                   
                     else
                     {
                         n.Controller = "Login";

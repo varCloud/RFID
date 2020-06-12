@@ -128,6 +128,7 @@ function initDataTable(nombreTabla) {
 
 
         "bDestroy": true, // es necesario para poder ejecutar la funcion LimpiaTabla()
+        "ordering": false
     });
 
 }

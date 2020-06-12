@@ -38,21 +38,18 @@ else
                         <div class="table-responsive">
                             <table class="table table-striped" id="tblInventario">
                                 <thead>
-                                    <tr>
-                                        <th>Tag</th>
+                                    <tr>                                        
                                         <th>Descripciòn</th>
                                         <th>Total de productos entrantes</th>
                                         <th>Total de productos salientes</th>
                                         <th>Cantidad a la Fecha</th>
-                                        <th>Fecha Actualización</th>
+                                        <th>Fecha</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (Producto item in inventario)
                                     {
-                                        <tr>
-
-                                            <td>@item.tag</td>
+                                        <tr>                                           
                                             <td>@item.descripcion</td>
                                             <td>@item.cantidadTotalEntradas</td>
                                             <td>@item.cantidadTotalSalidas</td>

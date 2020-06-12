@@ -17,8 +17,6 @@ namespace AdminRFID.Models
         public Int64 cantidadTotalSalidas { get; set; }
         public string descipcionExistencias { get; set; }
         public string codigo { get; set; }
-
-
-
+        public string ultimoEstatusInventario { get; set; }
     }
 }

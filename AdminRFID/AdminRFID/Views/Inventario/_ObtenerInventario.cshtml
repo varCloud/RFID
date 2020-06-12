@@ -17,8 +17,8 @@
             <div class="card-header-action">
                 @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_registrar_entradas_y_salidas))
                 {
-                    <a href="#" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Registrar entradas" onclick="RegistrarInventario(1)"><i class="fas fa-tasks"></i></a>
-                    <a href="#" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Registrar salidas" onclick="RegistrarInventario(2)"><i class="fas fa-tasks"></i></a>
+                    <a href="#" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Registrar entradas" onclick="RegistrarInventario(2)"><i class="fas fa-tasks"></i></a>
+                    <a href="#" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Registrar salidas" onclick="RegistrarInventario(3)"><i class="fas fa-tasks"></i></a>
                 }
             </div>
         </div>
@@ -65,8 +65,8 @@ else
                                     @foreach (InventarioDetalle item in inventario)
                                     {
                                     <tr>
-                                        <th>@cont</th>
-                                        @*<td>@item.idInventarioDetalle</td>*@
+                                        @*<th>@cont</th>*@
+                                        <td>@item.idInventarioDetalle</td>
                                         <td>@item.producto.tag</td>
                                         <td>@item.producto.descripcion</td>
                                         <td>@item.producto.cantidad</td>
@@ -78,7 +78,7 @@ else
                                         @if (Puede_cancelar_entradas_y_salidas)
                                         {
                                             <td>
-                                                @if (item.fechaAlta.ToShortDateString() == DateTime.Now.ToShortDateString())
+                                                @if ((item.fechaAlta.ToShortDateString() == DateTime.Now.ToShortDateString()) && ((item.tipoInventario==EnumTipoInventario.Entrada) || item.tipoInventario == EnumTipoInventario.Salida) )
                                                 {
                                                     <div class="buttons">
                                                         <a href="javascript:CancelarInventario(@item.idInventarioDetalle,'@item.tipoInventario.ToString()','@item.producto.cantidad');" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Cancelar"><i class="fas fa-times"></i></a>

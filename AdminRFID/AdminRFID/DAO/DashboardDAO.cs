@@ -22,7 +22,7 @@ namespace AdminRFID.DAO
                 {
                     var parameters = new DynamicParameters();
                     parameters.Add("@idTipoReporte", idTipoReporte);
-                    parameters.Add("@idTipoInventario", enumTipoGrafico == EnumTipoGrafico.EntradasPorFecha ? 1 : 2);
+                    parameters.Add("@idTipoInventario", enumTipoGrafico == EnumTipoGrafico.EntradasPorFecha ? 2 : 3);
                     var rs = db.QueryMultiple("SP_DASHBOARD_CONSULTA_TOTAL_ENTRADAS_SALIDAS_INVENTARIO", parameters, commandType: CommandType.StoredProcedure);
                     var rs1 = rs.ReadFirst();
                     if (rs1.status == 200)
@@ -59,7 +59,7 @@ namespace AdminRFID.DAO
                     var parameters = new DynamicParameters();
                     parameters.Add("@fechaIni", fechaIni == DateTime.MinValue ? (object)null : fechaIni);
                     parameters.Add("@fechaFin", fechaFin == DateTime.MinValue ? (object)null : fechaFin);
-                    parameters.Add("@idTipoInventario", enumTipoGrafico == EnumTipoGrafico.EntradasPorFecha ? 1 : 2);
+                    parameters.Add("@idTipoInventario", enumTipoGrafico == EnumTipoGrafico.EntradasPorFecha ? 2 : 3);
                     var rs = db.QueryMultiple("SP_DASHBOARD_CONSULTA_TOTAL_ENTRADAS_SALIDAS_POR_PRODUCTO", parameters, commandType: CommandType.StoredProcedure);
                     var rs1 = rs.ReadFirst();
                     if (rs1.status == 200)

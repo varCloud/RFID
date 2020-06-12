@@ -1,16 +1,16 @@
 ﻿var tblInventario;
 $(document).ready(function () {
     InitRangePicker('rangeInventario', 'fechaIni', 'fechaFin');
-    //$('#fechaIni').val($('#rangeInventario').data('daterangepicker').startDate.format('YYYY-MM-DD'));
-    //$('#fechaFin').val($('#rangeInventario').data('daterangepicker').startDate.format('YYYY-MM-DD'));
+    $('#fechaIni').val($('#rangeInventario').data('daterangepicker').startDate.format('YYYY-MM-DD'));
+    $('#fechaFin').val($('#rangeInventario').data('daterangepicker').startDate.format('YYYY-MM-DD'));
     $("#frmInventario").submit();
     //InitTableInventario();
-    $('#rangeInventario').val('');
+    //$('#rangeInventario').val('');
 
     $("#btnLimpiarForm").click(function (evt) {
         $("#frmInventario").trigger("reset");
         $('#fechaIni').val('');
-        $('#fechaFin').val('');
+        $('#fechaFin').val('');      
 
     });
 });
