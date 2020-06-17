@@ -56,7 +56,7 @@ new { id = "frmUsuario" }))
         </div>
 
         <div class="form-group col-lg-6">
-            <label>Telefono</label>
+            <label>Teléfono</label>
             @Html.TextBoxFor(x => usuario.telefono, new { @class = "form-control", onkeypress = "return esNumero(event)" })
             @Html.ValidationMessageFor(x => usuario.telefono, null, new { @class = "text-danger was" })
         </div>

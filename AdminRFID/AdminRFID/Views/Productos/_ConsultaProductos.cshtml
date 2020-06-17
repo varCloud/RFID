@@ -25,7 +25,7 @@
                                         #
                                     </th>
                                     <th>Tag</th>
-                                    <th>Descripciòn</th>
+                                    <th>Descripción</th>
                                     <th>Código de Barras</th>
                                     <th>Fecha Alta</th>
                                     <th>Estatus</th>
@@ -62,10 +62,10 @@
                                                 {
                                                     <a href="javascript:ConsultaProducto(@item.idProducto);" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Editar"><i class="far fa-edit"></i></a>
                                                 }
-                                                @if (puede_imprimir_codigos)
+                                                @*@if (puede_imprimir_codigos)
                                                 {
                                                     <a href="@Url.Action("PdfCodigos", "Productos", new {codigo=item.codigo,Producto=item.descripcion })" class="btn btn-icon btn-success @Html.Raw(string.IsNullOrEmpty(item.codigo) ? "disabled" : "")" data-toggle="tooltip" title="Imprimir Códigos" target="_blank"><i class="fas fa-qrcode"></i></a>
-                                                }
+                                                }*@
                                                 @if (Puede_eliminar_un_producto)
                                                 {
                                                     <a href="javascript:EliminarProducto(@item.idProducto);" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Eliminar"><i class="fas fa-times"></i></a>

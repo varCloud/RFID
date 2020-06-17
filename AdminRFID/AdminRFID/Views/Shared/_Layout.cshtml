@@ -73,7 +73,7 @@
                             <span class="d-sm-none d-lg-inline-block"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right pullDown">
-                            <div class="dropdown-title">Hello Sarah Smith</div>
+                            <div class="dropdown-title">Hola @sesion.usuario.nombreCompleto</div>
       
       
                             <a href="@Url.Action("CerrarSesion","Login")" class="dropdown-item has-icon text-danger">
@@ -101,7 +101,7 @@
                     </div>
                     <ul class="sidebar-menu">
 
-                        @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_dashboard))
+                        @*@if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_dashboard))
                         {
 
                             <li class="@(ViewBag.Title.ToString() == "Dashboard" ? "dropdown active" : "")">
@@ -111,7 +111,7 @@
                             </li>
 
 
-                        }
+                        }*@
 
                         @if (Sesion.TienePermiso(EnumRolesPermisos.Puede_visualizar_reporte_inventario))
                         {
@@ -127,7 +127,7 @@
                         {
                             <li class="@(ViewBag.Title.ToString() == "Inventario" ? "dropdown active" : "")">
                                 <a href="@Url.Action("Inventario", "Inventario")">
-                                    <i data-feather="sliders"></i><span>Historico</span>
+                                    <i data-feather="sliders"></i><span>Histórico</span>
                                 </a>
                             </li>
                         }

@@ -11,7 +11,8 @@ function onSuccessResult(data) {
     OcultarLoader();
 
     if (data.Estatus == 200) {
-        location.href = rootUrl("" + data.Controller + "/" + data.Action+"/");
+        //location.href = rootUrl("" + data.Controller + "/" + data.Action+"/");
+        location.href = rootUrl("Reportes/Inventario/");
     } else {
         $("#btnIniciarSesion").removeClass('btn-progress disabled');
         InitRecaptcha();
