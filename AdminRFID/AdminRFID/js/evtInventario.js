@@ -31,14 +31,14 @@ function InitTableInventario() {
                     doc.defaultStyle.fontSize = 8;
                     doc.styles.tableHeader.fontSize = 10;
                     doc.defaultStyle.alignment = 'center';
-                    doc.content[1].table.widths = ['20%', '20%', '10%', '10%','10%', '10%','10%','10%'];
+                    //doc.content[1].table.widths = ['20%', '20%', '10%', '10%','10%', '10%','10%','10%'];
                     doc.pageMargins = [30, 85, 20, 30];
                     doc.content.splice(0, 1);
                     doc['header'] = SetHeaderPDF("Inventario");
                     doc['footer'] = (function (page, pages) { return setFooterPDF(page, pages) });
                 },
                 exportOptions: {
-                    columns: [1, 2, 3, 4,5,6,7,8]
+                    columns: [1, 2, 3, 4,5,6,7,8,9]
                 },
             },
             {
@@ -47,7 +47,7 @@ function InitTableInventario() {
                 className: '',
                 titleAttr: 'Exportar a Excel',
                 exportOptions: {
-                    columns: [1, 2, 3, 4,5,6,7,8]
+                    columns: [1, 2, 3, 4,5,6,7,8,9]
                 },
             },
         ],
@@ -150,7 +150,7 @@ function CancelarInventario(idInventarioDetalle,tipoInventario,cantidad) {
 function RegistrarInventario(idTipoInventario) {
     $.ajax({
         url: "/Inventario/_Inventario",
-        data: { tipoInventario: idTipoInventario },
+        data: { idTipoInventario: idTipoInventario },
         method: 'post',
         dataType: 'html',
         async: false,
@@ -161,7 +161,7 @@ function RegistrarInventario(idTipoInventario) {
             OcultarLoader();
             $('#viewModalInventario').html(data);
             $.validator.unobtrusive.parse("#frmInventario")
-            if (idTipoInventario == 1)
+            if (idTipoInventario == 2)
                 $("#TituloModalInventario").html("Entrada de productos");
             else {
                 $("#TituloModalInventario").html("Salida de productos");
@@ -263,7 +263,7 @@ function InitInventario() {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    dataToPost = JSON.stringify({ listProductos: productos, tipoInventario: $("#idTipoInventario").val(), noPuerta:0 });
+                    dataToPost = JSON.stringify({ listProductos: productos, idtipoInventario: $("#idTipoInventario").val(), noPuerta:0 });
 
                     $.ajax({
                         url: rootUrl("/Inventario/AfectaInventario"),

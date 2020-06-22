@@ -11,7 +11,7 @@ namespace AdminRFID.Models
         public Producto producto { get; set; }
         public Int64 cantidadDespuesOperacion { get; set; }
         public Usuario usuario { get; set; }
-        public EnumTipoInventario tipoInventario { get; set; }
+        public TipoInventario tipoInventario { get; set; }
         public EnumEstatusInventario estatusInventario { get; set; }
         public DateTime fechaInicio { get; set; }
         public DateTime fechaFin { get; set; }
@@ -22,6 +22,7 @@ namespace AdminRFID.Models
         {
             producto = new Producto();
             usuario = new Usuario();
+            tipoInventario = new TipoInventario();
 
         }
     }

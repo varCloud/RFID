@@ -25,13 +25,15 @@ namespace AdminRFID.DAO
                 {
                     var parameters = new DynamicParameters();
                     parameters.Add("@idProducto", p.idProducto == 0 ? (object)null : p.idProducto);
+                    parameters.Add("@idEstatusCalidad", p.estatusCalidad.idEstatusCalidad == 0 ? (object)null : p.estatusCalidad.idEstatusCalidad);
+                    parameters.Add("@idUnidadMedida", p.unidadMedida.idUnidadMedida == 0 ? (object)null : p.unidadMedida.idUnidadMedida);
                     var result = db.QueryMultiple("SP_OBTENER_PRODUCTOS ", parameters, commandType: CommandType.StoredProcedure);
                     var r1 = result.ReadFirst();
                     if (r1.Estatus == 200)
                     {
                         notificacion.Estatus = r1.Estatus;
                         notificacion.Mensaje = r1.Mensaje;
-                        notificacion.Modelo = result.Read<Producto>().ToList();
+                        notificacion.Modelo = result.Read<Producto,EstatusCalidad,UnidadMedida,Producto>(MapProducto, splitOn: "idEstatusCalidad,idUnidadMedida").ToList();
                     }
                     else
                     {
@@ -48,6 +50,13 @@ namespace AdminRFID.DAO
             return notificacion;
         }
 
+        public Producto MapProducto(Producto p, EstatusCalidad e,UnidadMedida u)
+        {
+            p.estatusCalidad = e;
+            p.unidadMedida = u;
+            return p;
+        }
+
         public Notificacion<string> GuardaProducto(Producto producto)
         {
             Notificacion<string> notificacion = new Notificacion<string>();
@@ -59,7 +68,12 @@ namespace AdminRFID.DAO
                     parameters.Add("@idProducto", producto.idProducto == 0 ? (object)null : producto.idProducto);
                     parameters.Add("@tag", producto.tag);
                     parameters.Add("@descripcion", producto.descripcion);
-                    parameters.Add("@codigo", producto.codigo);                    
+                    parameters.Add("@codigo", producto.codigo);
+                    parameters.Add("@nombre", producto.nombre);
+                    parameters.Add("@lote", producto.lote);
+                    parameters.Add("@idUnidadMedida", producto.unidadMedida.idUnidadMedida == 0 ? (object)null : producto.unidadMedida.idUnidadMedida);
+                    parameters.Add("@idEstatusCalidad", producto.estatusCalidad.idEstatusCalidad == 0 ? (object)null : producto.estatusCalidad.idEstatusCalidad);
+                    parameters.Add("@LPN", producto.LPN);
                     notificacion = db.QuerySingle<Notificacion<string>>("SP_AGREGA_ACTUALIZA_PRODUCTO ", parameters, commandType: CommandType.StoredProcedure);
                 }
 

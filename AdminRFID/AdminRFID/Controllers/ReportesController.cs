@@ -19,6 +19,7 @@ namespace AdminRFID.Controllers
         {
             try
             {
+                ViewBag.EstatusCalidad = new CatalogoDAO().ObtenerEstatusCalidad();
                 return View();
             }
             catch (Exception ex)

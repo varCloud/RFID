@@ -54,6 +54,7 @@ else
                                         <th>Usuario</th>
                                         <th>Tipo Inventario</th>
                                         <th>Estatus Inventario</th>
+                                        <th>Estatus Calidad</th>
                                         <th>Fecha Alta</th>
                                         @if (Puede_cancelar_entradas_y_salidas)
                                         {
@@ -72,13 +73,14 @@ else
                                         <td>@item.producto.cantidad</td>
                                         <td>@item.noPuerta</td>
                                         <td>@item.usuario.usuario</td>
-                                        <td><div class="badge @Html.Raw(item.tipoInventario == EnumTipoInventario.Entrada ? "badge-dark" : "badge-danger") badge-shadow">@item.tipoInventario.ToString()</div></td>
+                                        <td><div class="badge @Html.Raw(item.tipoInventario.idTipoInventario == 2 ? "badge-dark" : "badge-danger") badge-shadow">@item.tipoInventario.descTipoInventario.ToString()</div></td>
                                         <td><div class="badge @Html.Raw(item.estatusInventario == EnumEstatusInventario.Realizado ? "badge-success" : "badge-danger") badge-shadow">@item.estatusInventario.ToString()</div> </td>
-                                        <td>@item.fechaAlta</td>
+                                        <td>@item.producto.estatusCalidad.descEstatusCalidad</td>
+                                        <td>@item.fechaAlta</td>                                        
                                         @if (Puede_cancelar_entradas_y_salidas)
                                         {
                                             <td>
-                                                @if ((item.fechaAlta.ToShortDateString() == DateTime.Now.ToShortDateString()) && ((item.tipoInventario==EnumTipoInventario.Entrada) || item.tipoInventario == EnumTipoInventario.Salida) )
+                                                @if ((item.fechaAlta.ToShortDateString() == DateTime.Now.ToShortDateString()) && ((item.tipoInventario.idTipoInventario == 2) || item.tipoInventario.idTipoInventario == 3))
                                                 {
                                                     <div class="buttons">
                                                         <a href="javascript:CancelarInventario(@item.idInventarioDetalle,'@item.tipoInventario.ToString()','@item.producto.cantidad');" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Cancelar"><i class="fas fa-times"></i></a>

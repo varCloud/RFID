@@ -25,7 +25,12 @@
                                         #
                                     </th>
                                     <th>Tag</th>
+                                    <th>Nombre</th>
                                     <th>Descripción</th>
+                                    <th>Lote</th>
+                                    <th>LPN</th>
+                                    <th>Estatus Calidad</th>
+                                    <th>Unidad Medida</th>
                                     <th>Código de Barras</th>
                                     <th>Fecha Alta</th>
                                     <th>Estatus</th>
@@ -43,7 +48,12 @@
                                 <tr>
                                     <td>@item.idProducto</td>
                                     <td>@item.tag</td>
+                                    <td>@item.nombre</td>
                                     <td>@item.descripcion</td>
+                                    <td>@item.lote</td>
+                                    <td>@item.LPN</td>
+                                    <td>@item.estatusCalidad.descEstatusCalidad</td>
+                                    <td>@item.unidadMedida.descUnidadMedida</td>
                                     <td>@item.codigo</td>
                                     <td>@item.fechaAlta.ToShortDateString()</td>
                                     <td>@item.ultimoEstatusInventario</td>
@@ -63,9 +73,9 @@
                                                     <a href="javascript:ConsultaProducto(@item.idProducto);" class="btn btn-icon btn-dark" data-toggle="tooltip" title="Editar"><i class="far fa-edit"></i></a>
                                                 }
                                                 @*@if (puede_imprimir_codigos)
-                                                {
-                                                    <a href="@Url.Action("PdfCodigos", "Productos", new {codigo=item.codigo,Producto=item.descripcion })" class="btn btn-icon btn-success @Html.Raw(string.IsNullOrEmpty(item.codigo) ? "disabled" : "")" data-toggle="tooltip" title="Imprimir Códigos" target="_blank"><i class="fas fa-qrcode"></i></a>
-                                                }*@
+                    {
+                        <a href="@Url.Action("PdfCodigos", "Productos", new {codigo=item.codigo,Producto=item.descripcion })" class="btn btn-icon btn-success @Html.Raw(string.IsNullOrEmpty(item.codigo) ? "disabled" : "")" data-toggle="tooltip" title="Imprimir Códigos" target="_blank"><i class="fas fa-qrcode"></i></a>
+                    }*@
                                                 @if (Puede_eliminar_un_producto)
                                                 {
                                                     <a href="javascript:EliminarProducto(@item.idProducto);" class="btn btn-icon btn-danger" data-toggle="tooltip" title="Eliminar"><i class="fas fa-times"></i></a>

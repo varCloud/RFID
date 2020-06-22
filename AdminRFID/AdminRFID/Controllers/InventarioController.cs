@@ -18,6 +18,8 @@ namespace AdminRFID.Controllers
         {
             try
             {
+                ViewBag.tipoInventario = new CatalogoDAO().ObtenerTiposInventario();//.Where(x=>(x.Value!="5" && x.Value != "6"));
+                ViewBag.EstatusCalidad = new CatalogoDAO().ObtenerEstatusCalidad();
                 return View();
             }
             catch (Exception ex)
@@ -30,14 +32,14 @@ namespace AdminRFID.Controllers
 
         [HttpPost]
         [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_registrar_entradas_y_salidas)]
-        public ActionResult _Inventario(EnumTipoInventario tipoInventario)
+        public ActionResult _Inventario(TipoInventario tipoInventario)
         {
             try
             {
                 Notificacion<List<Producto>> notificacion = new ProductoDAO().ObtenerProductos(new Producto());
                 List<Producto> productos = notificacion.Modelo != null ? notificacion.Modelo : new List<Producto>();
                 ViewBag.listProductos = new SelectList(productos, "idProducto", "descipcionExistencias").ToList();
-                ViewBag.tipoInventario = Convert.ToInt32(tipoInventario);
+                ViewBag.tipoInventario = Convert.ToInt32(tipoInventario.idTipoInventario);
                 return PartialView();
             }
             catch (Exception ex)
@@ -49,7 +51,7 @@ namespace AdminRFID.Controllers
 
         [HttpPost]
         [PermisoAttribute(Permiso = EnumRolesPermisos.Puede_registrar_entradas_y_salidas)]
-        public ActionResult AfectaInventario(EnumTipoInventario tipoInventario,List<Producto> listProductos,int noPuerta)
+        public ActionResult AfectaInventario(TipoInventario tipoInventario,List<Producto> listProductos,int noPuerta)
         {
             try
             {

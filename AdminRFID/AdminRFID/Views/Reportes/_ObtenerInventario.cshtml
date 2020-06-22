@@ -38,8 +38,9 @@ else
                         <div class="table-responsive">
                             <table class="table table-striped" id="tblInventario">
                                 <thead>
-                                    <tr>                                        
-                                        <th>Descripciòn</th>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Estatus de Calidad</th>
                                         <th>Total de productos entrantes</th>
                                         <th>Total de productos salientes</th>
                                         <th>Cantidad a la Fecha</th>
@@ -49,13 +50,14 @@ else
                                 <tbody>
                                     @foreach (Producto item in inventario)
                                     {
-                                        <tr>                                           
-                                            <td>@item.descripcion</td>
-                                            <td>@item.cantidadTotalEntradas</td>
-                                            <td>@item.cantidadTotalSalidas</td>
-                                            <td>@item.cantidad</td>
-                                            <td>@item.fechaAlta.ToShortDateString()</td>
-                                        </tr>
+                                    <tr>
+                                        <td>@item.nombre</td>
+                                        <td>@item.estatusCalidad.descEstatusCalidad</td>
+                                        <td>@item.cantidadTotalEntradas</td>
+                                        <td>@item.cantidadTotalSalidas</td>
+                                        <td>@item.cantidad</td>
+                                        <td>@item.fechaAlta.ToShortDateString()</td>
+                                    </tr>
 
                                     }
                                 </tbody>

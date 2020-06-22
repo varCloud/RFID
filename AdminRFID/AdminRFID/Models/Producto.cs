@@ -18,5 +18,18 @@ namespace AdminRFID.Models
         public string descipcionExistencias { get; set; }
         public string codigo { get; set; }
         public string ultimoEstatusInventario { get; set; }
+
+        public string nombre { get; set; }
+        public string lote { get; set; }
+        public UnidadMedida unidadMedida { get; set; }
+        public EstatusCalidad estatusCalidad { get; set; }
+        public string LPN { get; set; }
+
+        public Producto()
+        {
+            unidadMedida = new UnidadMedida();
+            estatusCalidad = new EstatusCalidad();
+        }
+
     }
 }

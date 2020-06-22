@@ -7,7 +7,7 @@
 
 @{ 
     InventarioDetalle inventario = new InventarioDetalle();
-    inventario.tipoInventario = EnumTipoInventario.Todos;
+    List<SelectListItem> listItemsTipoInventario = (List<SelectListItem>)ViewBag.tipoInventario;
 }
 
 @section Styles {
@@ -63,8 +63,19 @@
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <div class="form-group">
                                     <label>Tipo Inventario</label>
-                                    @Html.EnumDropDownListFor(x => inventario.tipoInventario, new { @class = "form-control", data_val = "false" })
-                                </div>
+                                    <select class="form-control" name="inventario.tipoInventario.idTipoInventario">
+                                        <option value="-1">--TODOS--</option>
+                                        @foreach (SelectListItem item in listItemsTipoInventario.Where(x => (x.Value != "5" && x.Value != "6")))
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+
+
+                                        }
+
+                                    </select>
+                                    @*@Html.DropDownListFor(x => inventario.tipoInventario.idTipoInventario, (List<SelectListItem>)ViewBag.tipoInventario,"--TODOS--", new { @class = "form-control", data_val = "false" })*@
+
+                                        </div>
                             </div>
                             <div class="col-12 col-sm-12 col-lg-4">
                                 <div class="form-group">
@@ -75,6 +86,12 @@
                         </div>
 
                         <div class="row">
+                            <div class="col-12 col-sm-12 col-lg-4">
+                                <div class="form-group">
+                                    <label>Estatus Calidad</label>
+                                    @Html.DropDownListFor(x => inventario.producto.estatusCalidad.idEstatusCalidad, (List<SelectListItem>)ViewBag.EstatusCalidad, "--TODOS--", new { @class = "form-control", data_val = "false" })
+                                </div>
+                            </div>
                             <div class="col-12 col-sm-12 col-lg-4">
 
                                 <div class="form-group">

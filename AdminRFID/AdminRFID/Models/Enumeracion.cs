@@ -5,17 +5,17 @@ using System.Web;
 
 namespace AdminRFID.Models
 {
-    public enum EnumTipoInventario
-    {
-        Todos=-1,
-        NoRegistrado=0,
-        Registrado=1,
-        Entrada=2,
-        Salida=3,
-        Re_localizado=4
-        //Entrada_Cancelada=5,
-        //Salida_Cancelada=6
-    }
+    //public enum EnumTipoInventario
+    //{
+    //    Todos = -1,
+    //    NoRegistrado = 0,
+    //    Registrado = 1,
+    //    Entrada = 2,
+    //    Salida = 3,
+    //    Re_localizado = 4
+    //    Entrada_Cancelada = 5,
+    //    Salida_Cancelada = 6
+    //}
 
     public enum EnumEstatusInventario
     {

@@ -16,7 +16,7 @@ namespace AdminRFID.DAO
     public class InventarioDAO
     {
         private IDbConnection db = null;
-        public Notificacion<string> AfectaInventario(EnumTipoInventario tipoInventario, List<Producto> listProductos,int idUsuario,int noPuerta)
+        public Notificacion<string> AfectaInventario(TipoInventario tipoInventario, List<Producto> listProductos,int idUsuario,int noPuerta)
         {
 
             Notificacion<string> notificacion = new Notificacion<string>();
@@ -34,7 +34,7 @@ namespace AdminRFID.DAO
                     var parameters = new DynamicParameters();
                     parameters.Add("@productos", stringBuilder.ToString());
                     parameters.Add("@idUsuario", idUsuario);
-                    parameters.Add("@TipoInventario", tipoInventario);
+                    parameters.Add("@TipoInventario", tipoInventario.idTipoInventario);
                     parameters.Add("@noPuerta", noPuerta);
                     notificacion = db.QuerySingle<Notificacion<string>>("SP_AFECTA_INVENTARIO_MASIVO", parameters, commandType: CommandType.StoredProcedure);
                 }
@@ -57,18 +57,19 @@ namespace AdminRFID.DAO
                 {
                     var parameters = new DynamicParameters();
                     parameters.Add("@tagProducto", string.IsNullOrEmpty(i.producto.tag)? (object)null : i.producto.tag);
-                    parameters.Add("@idCatTipoInventario", i.tipoInventario == EnumTipoInventario.Todos ? (object)null : i.tipoInventario);
+                    parameters.Add("@idCatTipoInventario", i.tipoInventario.idTipoInventario==-1 ? (object)null : i.tipoInventario.idTipoInventario);
                     parameters.Add("@idEstatusInventario", i.estatusInventario == 0 ? (object)null : i.estatusInventario);
                     parameters.Add("@idUsuario", i.usuario.idUsuario == 0 ? (object)null : i.usuario.idUsuario);
                     parameters.Add("@fechaInicio", i.fechaInicio == DateTime.MinValue ? (object)null : i.fechaInicio);
                     parameters.Add("@fechaFin", i.fechaFin == DateTime.MinValue ? (object)null : i.fechaFin);
+                    parameters.Add("@idEstatusCalidad", i.producto.estatusCalidad.idEstatusCalidad == 0 ? (object)null : i.producto.estatusCalidad.idEstatusCalidad);
                     var result = db.QueryMultiple("SP_OBTENER_INVENTARIO", parameters, commandType: CommandType.StoredProcedure);
                     var r1 = result.ReadFirst();
                     if (r1.Estatus == 200)
                     {
                         notificacion.Estatus = r1.Estatus;
                         notificacion.Mensaje = r1.Mensaje;
-                        notificacion.Modelo = result.Read<InventarioDetalle, Producto,Usuario, InventarioDetalle>(MapInventario, splitOn: "idProducto,idUsuario").ToList();
+                        notificacion.Modelo = result.Read<InventarioDetalle,TipoInventario, Producto,EstatusCalidad,Usuario, InventarioDetalle>(MapInventario, splitOn: "idTipoInventario,idProducto,idUsuario,idEstatusCalidad").ToList();
                     }
                     else
                     {
@@ -116,7 +117,8 @@ namespace AdminRFID.DAO
                 using (db = new SqlConnection(ConfigurationManager.AppSettings["conexionString"].ToString()))
                 {
                     var parameters = new DynamicParameters();
-                    parameters.Add("@DescripcionProducto", string.IsNullOrEmpty(i.producto.descripcion) ? (object)null : i.producto.descripcion);
+                    parameters.Add("@NombreProducto", string.IsNullOrEmpty(i.producto.nombre) ? (object)null : i.producto.nombre);
+                    parameters.Add("@idEstatusCalidad", i.producto.estatusCalidad.idEstatusCalidad==0 ? (object)null : i.producto.estatusCalidad.idEstatusCalidad);
                     parameters.Add("@fechaIni", i.fechaInicio == DateTime.MinValue ? (object)null : i.fechaInicio);
                     parameters.Add("@fechaFin", i.fechaFin == DateTime.MinValue ? (object)null : i.fechaFin);
                     var result = db.QueryMultiple("SP_OBTENER_INVENTARIO_GENERAL ", parameters, commandType: CommandType.StoredProcedure);
@@ -125,7 +127,7 @@ namespace AdminRFID.DAO
                     {
                         notificacion.Estatus = r1.Estatus;
                         notificacion.Mensaje = r1.Mensaje;
-                        notificacion.Modelo = result.Read<Producto>().ToList();
+                        notificacion.Modelo = result.Read<Producto,EstatusCalidad,Producto>(MapProducto,splitOn: "idEstatusCalidad").ToList();
                     }
                     else
                     {
@@ -142,11 +144,21 @@ namespace AdminRFID.DAO
             return notificacion;
         }
 
+        public Producto MapProducto(Producto p, EstatusCalidad e)
+        {
+            p.estatusCalidad = e;   
+            return p;
+        }
 
-        public InventarioDetalle MapInventario(InventarioDetalle i, Producto p,Usuario u)
+
+
+        public InventarioDetalle MapInventario(InventarioDetalle i, TipoInventario t,Producto p,EstatusCalidad e,Usuario u)
         {
             i.producto = p;
+            i.producto.estatusCalidad = e;
+            i.tipoInventario = t;
             i.usuario = u;
+
             return i;
         }
     }

@@ -35,11 +35,16 @@ namespace AdminRFID.Controllers
             try
             {
                 Producto p = new Producto();
+                CatalogoDAO daoCatalogo = new CatalogoDAO();
+
 
                 if (producto.idProducto > 0)
                 {
                     p = new ProductoDAO().ObtenerProductos(producto).Modelo.First();
                 }
+
+                ViewBag.EstatusCalidad = daoCatalogo.ObtenerEstatusCalidad();
+                ViewBag.UnidadMedida = daoCatalogo.ObtenerUnidadesMedida();
 
                 return PartialView(p);
             }
