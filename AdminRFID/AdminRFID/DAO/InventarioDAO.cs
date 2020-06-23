@@ -69,7 +69,7 @@ namespace AdminRFID.DAO
                     {
                         notificacion.Estatus = r1.Estatus;
                         notificacion.Mensaje = r1.Mensaje;
-                        notificacion.Modelo = result.Read<InventarioDetalle,TipoInventario, Producto,EstatusCalidad,Usuario, InventarioDetalle>(MapInventario, splitOn: "idTipoInventario,idProducto,idUsuario,idEstatusCalidad").ToList();
+                        notificacion.Modelo = result.Read<InventarioDetalle,TipoInventario, Producto,Usuario, EstatusCalidad, InventarioDetalle>(MapInventario, splitOn: "idTipoInventario,idProducto,idUsuario,idEstatusCalidad").ToList();
                     }
                     else
                     {
@@ -83,6 +83,7 @@ namespace AdminRFID.DAO
             {
                 throw ex;
             }
+            //InventarioDetalle inv =  notificacion.Modelo.First(p => p.producto.estatusCalidad.idEstatusCalidad > 0);
             return notificacion;
         }
 
@@ -152,7 +153,7 @@ namespace AdminRFID.DAO
 
 
 
-        public InventarioDetalle MapInventario(InventarioDetalle i, TipoInventario t,Producto p,EstatusCalidad e,Usuario u)
+        public InventarioDetalle MapInventario(InventarioDetalle i, TipoInventario t,Producto p, Usuario u, EstatusCalidad e)
         {
             i.producto = p;
             i.producto.estatusCalidad = e;
