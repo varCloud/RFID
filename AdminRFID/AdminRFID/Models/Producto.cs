@@ -24,6 +24,8 @@ namespace AdminRFID.Models
         public UnidadMedida unidadMedida { get; set; }
         public EstatusCalidad estatusCalidad { get; set; }
         public string LPN { get; set; }
+        public string producto { get; set; }
+
 
         public Producto()
         {
